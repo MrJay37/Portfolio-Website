@@ -1,0 +1,154 @@
+@import '../../styles/utils.scss';
+
+.swContainer{
+    .swList{
+        .swCard{
+            border: var(--theme-light) solid 2px;
+            font-family: 'Source Sans Pro';
+            
+            .swcMain{
+                .swcmHeader{
+                    justify-content: space-between;
+    
+                    h3{
+                        font-size: var(--heading-3-font-size);
+                        font-weight: var(--font-weight-normal);
+                        margin: 0;
+                    }
+    
+                    span{
+                        font-size: var(--font-size-m);
+                    }
+                }
+                
+                .swcmTechStackTags{
+                    margin: 10px 0 0;
+                    flex-wrap: wrap;
+                    
+                    span{
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                        border: 1px solid var(--theme-medium-light);
+                        padding: 5px 10px;
+                        border-radius: 1rem;
+                        font-size: var(--font-size-s);
+                    }
+                }
+            }
+
+            .swcExpand{
+                margin-top: 20px;
+                width: 100%;
+                align-items: center;
+
+                .swceDivider{
+                    margin-top: 10px;
+                    height: 1px;
+                    width: 100%;
+                    background-color: var(--theme-light);
+                }
+
+                .swceBody{
+                    margin-top: 20px;
+
+                    .swcebImage{
+                        width: 50%;
+                    }
+
+                    .swcebContent{
+                        padding: 0 20px;
+
+                        .swceSection{
+                            font-weight: var(--font-weight-light);
+                        }
+
+                        .swcesHeading{
+                            font-weight: var(--font-weight-normal);
+                            margin: 0;
+                            padding: 0 0 5px 0;
+                        }
+
+                        a{
+                            text-decoration: none;
+                            color:inherit;
+                        }
+
+                        .swcesMember{
+                            padding: 0 0 3px 0;
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+@media (max-width: $small-screen) {
+    .swContainer{
+        .list{
+            .card{
+                border: var(--theme-light) solid 1px;
+                font-family: 'Source Sans Pro';
+
+                .main{             
+                    .header{
+                        justify-content: space-between;
+        
+                        span{ text-align: right }
+                    }
+
+                    .techStackTags{
+                        justify-content: center;
+
+                        span{
+                            font-size: var(--font-size-m);
+                            font-weight: var(--font-weight-light);
+                        }
+                    }
+                }
+    
+                .expand{
+                    margin-top: 10px;
+        
+                    .expandBody{
+                        margin-top: 20px;
+                        flex-direction: column;
+                        align-items: center;
+    
+                        .expandBodyImage{
+                            width: 100%;
+                        }
+    
+                        .expandBodyContent{
+                            padding: 0;
+    
+                            .heading{
+                                font-size: var(--heading-3-font-size);
+                                font-weight: var(--font-weight-normal);
+                                padding: 5px 0;
+                                text-align: center;
+                            }
+
+                            p{ 
+                                text-align: justify;
+                                font-size: var(--font-size-m)
+                            }
+    
+                            .member{
+                                text-align: center;
+                                padding: 0 0 3px 0;
+                                font-weight: var(--font-weight-light);
+                                font-size: var(--font-size-m);
+                                &:hover{ text-decoration: underline }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

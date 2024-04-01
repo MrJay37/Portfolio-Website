@@ -1,0 +1,239 @@
+@import './utils.scss';
+@import './scrollbar.scss';
+
+// Root settings
+html, body {
+  margin: 0;
+  font-family: 'Source Sans Pro', 'Fjalla One', 'Raleway', sans-serif;
+  background-color: var(--theme-dark);
+  color: white;
+}
+
+* {box-sizing: border-box}
+
+
+// Global variables
+:root{
+  // Device dimensions
+  --small-screen: 600px;
+  --medium-screen: 1280px;
+
+  // Dimensions
+  --layout-container-width: 90%;
+  --header-height: 60px;
+  --vertical-spacing-margin: 30px auto;
+  --card-content-padding: 15px 20px;
+  --contact-form-input-width: 80%;
+  --contact-form-input-height: 40px;
+  --contact-form-textarea-height: 160px;
+  --max-container-width: 1128px;
+  --profile-picture-width: 450px;
+
+  // Constants
+  --theme-dark: #333333;
+  --theme-medium-dark: #777;
+  --theme-medium-light: #AAA;
+  --theme-light: #DDD;
+  --theme-secondary-color: #FFD700;
+
+  // Font colors
+  --font-color-black: #111;
+  --font-color-dark: #333333;
+  --font-color-medium-dark: #777;
+  --font-color-medium-light: #AAA;
+  --font-color-light: #DDD;
+
+  // Font weights
+  --font-weight-light: 100;
+  --font-weight-normal: 400;
+  --font-weight-heavy: 700;
+  
+
+  // Font sizes
+  --heading-1-font-size: 96px;
+  --heading-2-font-size: 48px;
+  --heading-3-font-size: 32px;
+  --font-size-xl: 28px;
+  --font-size-l: 24px;
+  --font-size-m: 20px;
+  --font-size-s: 16px;
+  --font-size-xs: 12px;
+}
+
+// ClassName base CSS Rules
+.flex{ display: flex }
+
+.flex-center-align{ display: flex; align-items: center }
+
+.flex-column { display: flex; flex-direction: column }
+
+.flex-column-center-align{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+}
+
+.section{ width: 100%; margin: var(--header-height) auto }
+
+.sectionContainer{
+  width: 80%;
+  max-width: var(--max-container-width);
+  margin: auto;
+  padding: 20px 0;
+}
+
+.sectionTitle{
+  padding: var(--header-height) 0 0;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  font-family: 'Fjalla One';
+  font-size: var(--heading-1-font-size);
+  font-weight: var(--font-weight-normal);
+  
+}
+
+.light_theme_section {
+  background-color: var(--theme-light);
+  color: var(--font-color-black);
+}
+
+.normal-text{
+  text-align: justify;
+  font-size: var(--font-size-m);
+}
+
+.cardBorder{
+  border: 1px solid var(--theme-dark);
+  overflow: hidden;
+  margin: var(--vertical-spacing-margin);
+  padding: var(--card-content-padding);
+}
+
+.cardRight{ flex-direction: row-reverse }
+
+.cardRightAlign{ align-items: flex-start }
+
+.cardLeft{ flex-direction: row }
+
+.cardLeftAlign{ align-items: flex-end }
+
+.switch{
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.notification{
+  position: fixed;
+  top: 20%;
+  left: 0;
+  right: 0;
+  width: 40%;
+  padding: 10px;
+  margin: 0 auto;
+
+  text-align: center;
+  font-size: var(--font-size-xl);
+}
+
+.fullWidth{
+  width: 100%;
+}
+
+@media(max-width: $medium-screen){
+  // Global variables
+  :root{
+    --max-container-width: 1000px;
+
+    // Dimensions
+    --header-height: 48px;
+    --vertical-spacing-margin: 30px auto;
+    --card-content-padding: 15px 20px;
+    --contact-form-input-width: 80%;
+    --contact-form-input-height: 40px;
+    --contact-form-textarea-height: 160px;
+
+    // Font sizes
+    --heading-1-font-size: 72px;
+    --heading-2-font-size: 36px;
+    --heading-3-font-size: 24px;
+    --font-size-xl: 28px;
+    --font-size-l: 20px;
+    --font-size-m: 18px;
+    --font-size-s: 14px;
+    --font-size-xs: 10px;
+  }
+  .cardRight{
+    flex-direction: column;
+  }
+  
+  .cardRightAlign{
+    align-items: center;
+  }
+  
+  .cardLeft{
+    flex-direction: column;
+    
+  }
+  
+  .cardLeftAlign{
+    align-items: center;
+  }
+}
+
+@media (max-width: $small-screen) {
+  :root{
+    --header-height: 45px;
+    --header-width: 95%;
+    --profile-picture-max-height: 400px;
+
+    // Font sizes
+    --heading-1-font-size: 60px;
+    --heading-2-font-size: 30px;
+    --heading-3-font-size: 20px;
+    --font-size-xl: 18px;
+    --font-size-l: 14px;
+    --font-size-m: 12px;
+    --font-size-s: 10px;
+    --font-size-xs: 8px;
+
+    --vertical-spacing-margin: 20px auto;
+    --card-content-padding: 10px 15px;
+
+    --max-container-width: 100%;
+    
+  }
+
+  .sectionTitle{
+    padding-top: calc(var(--header-height) + 10px);
+    padding-bottom: 10px;
+    font-size: var(--heading-2-font-size);
+    text-align: center;
+    font-weight: var(--font-weight-normal);
+  }
+  
+  .cardBorder{
+    border: 1px solid var(--theme-dark);
+    overflow: hidden;
+    margin: var(--vertical-spacing-margin);
+    padding: var(--card-content-padding);
+  }
+
+  .notification{
+    top: 10%;
+  }
+}
+
+@media(max-width: 319px){
+  html{
+    display: none
+  }
+}
+
+@media(max-height: 600px){
+  :root{
+    --profile-picture-max-height: 400px;
+  }
+}

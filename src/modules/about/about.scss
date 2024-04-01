@@ -1,0 +1,75 @@
+@import '../../styles/utils.scss';
+
+.aboutContainer{
+    .aboutBanner{
+        width: inherit;
+        display: block;
+        object-fit: cover;
+        height: calc(100vh - 3 * var(--header-height));
+    }
+
+    .aboutBannerText{
+        height: calc(2 * var(--header-height));
+        background-color: var(--theme-medium-light);
+        justify-content: center;
+
+        h1{
+            font-family: 'Fjalla One';
+            text-align: center;
+            font-size: var(--heading-2-font-size);
+            font-weight: var(--font-weight-normal);
+            text-transform: uppercase;
+            margin: 0;
+        }
+        
+    }
+
+    .aboutIntro{
+        h3{
+            font-weight: var(--font-weight-normal);
+            font-size: var(--heading-2-font-size);
+            font-family: 'Source Sans Pro';
+        }
+
+        .aboutIntroContainer{
+            margin-top: 40px;
+            .aboutIntroText{
+                padding: 0 5%;
+
+                p{ font-size: var(--font-size-m) }
+            }
+
+            .aboutIntroProfilePicture{
+                img{
+                    width: var(--profile-picture-width);
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 1080px){
+    .aboutContainer{
+        .aboutIntro{
+            .aboutIntroContainer{
+                flex-direction: column-reverse;
+
+                .aboutText{ p { font-size: var(--font-size-s) } }
+
+                .profilePicture{
+                    margin-top: none;
+                    width: 80%;
+                    margin: auto;
+                }
+            }
+
+            .aboutIntroBarContainer{ display: none }
+        }
+    }
+}
+
+
+@media (max-width: 600px) {
+    .container{ .intro{ .container{ .aboutText{ p{ font-size: var(--font-size-l) } } } } }
+}

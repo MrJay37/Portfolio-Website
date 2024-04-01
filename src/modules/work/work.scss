@@ -1,0 +1,97 @@
+@import '../../styles/utils.scss';
+
+.workContainer{
+    .workList{
+        .workCard{
+            .workCardHeader{
+                font-family: 'Source Sans Pro';
+                align-items: center;
+                
+                .wchLogo{
+                    width: 200px;
+                    height: 100px;
+                    margin-right: 35px;
+                    border: 1px solid gray;
+                    object-fit: cover;
+                }
+
+                .wchTitle{
+                    font-size: var(--heading-3-font-size);
+                    font-weight: var(--font-weight-normal);
+                }
+            }
+
+            .workCardBody{
+                padding: 20px 0;
+                font-family: 'Source Sans Pro';
+
+                .wcbDivider{
+                    height: 1px;
+                    background-color: var(--theme-medium-light);
+                }
+
+                .wPositionCards{
+                    margin: 20px auto;
+
+                    .wPositionCard{
+                        .wPositionTitle{
+                            font-size: var(--font-size-l);
+                            font-weight: var(--font-weight-normal);
+                            margin: 0;
+                        }
+
+                        .wPositionSubtitle{
+                            font-size: var(--font-size-m);
+                            font-weight: var(--font-weight-normal);
+                            margin: 0;
+                        }
+
+                        .wPositionDuties{
+                            font-size: var(--font-size-m);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.orgLink{
+    text-decoration: none;
+    color: black;
+}
+
+
+@media (max-width: $small-screen){
+    .workContainer{    
+        .workList{
+            .workCard{
+                .workCardHeader{
+                    .title{                        
+                        .text{
+                            h1{margin: 2px 0 }
+                
+                            h3{ margin: 3px 0 }
+        
+                            p{ margin: 7px 0 }
+                        }
+                    }
+                }
+    
+                .cardBody{
+                    padding: 20px 0;
+                    font-family: 'Source Sans Pro';
+                    font-size: var(--font-size-m);
+                    
+                    ul{
+                        padding: 0 0 0 4vw;
+                    }
+                    .cardDivider{
+                        height: 1px;
+                        background-color: var(--theme-medium-light);
+                    }
+                }
+            }
+        }
+    }
+}
