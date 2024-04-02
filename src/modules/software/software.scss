@@ -52,7 +52,12 @@
                     margin-top: 20px;
 
                     .swcebImage{
-                        width: 50%;
+                        min-width: 500px;
+                        max-width: 500px;
+
+                        img{
+                            width: 100%;
+                        }
                     }
 
                     .swcebContent{

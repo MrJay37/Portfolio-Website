@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Header } from './components';
-import { About, Education, Software, Work } from './modules';
+import { About, Contact, Education, Music, Software, Work } from './modules';
 
 import "./styles/global.scss"
 
@@ -16,6 +16,8 @@ const router = createBrowserRouter([
             <Education />
             <Work />
             <Software />
+            <Music />
+            <Contact />
         </>
     }
 ])

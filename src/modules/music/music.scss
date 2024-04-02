@@ -1,0 +1,246 @@
+@import '../../styles/utils.scss';
+
+.musicContainer{
+    .mucList{
+        max-width: 1128px;
+        margin: auto;
+
+        .muclCard{
+            font-family: 'Source Sans Pro';
+            border: var(--theme-dark) solid 2px;
+            position: relative;
+            padding: 0;
+            
+            .muclcHeader{
+                .muclchPoster{
+                    max-width: 60%;
+                }
+    
+                .muclchText{
+                    padding: 0 50px;
+                    justify-content: center;
+                    
+                    h3{
+                        font-size: var(--heading-2-font-size);
+                        font-family: 'Fjalla One';
+                    }
+    
+                    .muclchtTagContainer{
+                        flex-wrap: wrap;
+                        .muclchttcTag{
+                            border: 1px solid var(--theme-dark);
+                            border-radius: 1em;
+                            margin: 10px 10px;
+                            padding: 5px 15px;
+                        }
+                    }
+
+                }
+            }
+
+            .muclcExpand{
+                padding: 50px;
+                background-color: var(--theme-dark);
+                color: white;
+
+                h1{
+                    text-align: center;
+                    font-weight: var(--font-weight-normal);
+                }
+
+                .muclceMembers{
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: center;
+                    align-items: stretch;
+                    min-height: 250px;
+                    margin-bottom: 50px;
+
+                    .muclcemMember{
+                        border: 1px solid var(--theme-light);
+                        padding: 5px 10px;
+                        margin: 10px;
+                        min-height: 220px;
+                        max-width: 140px;
+                        text-align: center;
+                        justify-content: space-around;
+
+                        h4{
+                            font-weight: var(--font-weight-normal);
+                            font-size: var(--font-size-l);
+                            margin: 10px 0 0;
+                        }
+
+                        .muclcemmArtForms{
+                            justify-self: flex-start;
+                            justify-content: flex-start;
+                        }
+
+                        .muclcemmLinks{
+                            padding: 0 10%;
+                            font-size: var(--font-size-xl);
+                            justify-content: space-around;
+                            justify-self: flex-end;
+                            a{
+                                color: inherit
+                            };
+                        }
+                        
+                    }
+                }
+
+                .muclceDivide{
+                    height: 1px;
+                    width: 100%;
+                    background-color: var(--theme-light);
+                }
+
+                .muclceProjects{
+                    width: 100%;
+                    align-items: center;
+
+                    .muclcepProject{
+                        width: 100%;
+
+                        .muclceppEmbed{
+                            width: 100%;
+
+                            iframe{
+                                width: 50%;
+                                min-height: 300px;
+                                margin: auto
+                            }
+                        }
+
+                        .muclceppTitle{
+                            margin-top: 10px;
+                            font-size: var(--heading-3-font-size);
+                            text-align: center;
+                        }
+
+                        .muclceppGenre{
+                            width: 100%;
+                            text-align: center;
+                            margin: 10px 0;
+                            margin-bottom: 50px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $medium-screen) {
+    .container{
+        .list{
+            .card{
+                font-family: 'Source Sans Pro';
+                border: var(--theme-dark) solid 1px;
+                
+                .header{
+                    .poster{
+                        max-width: 100%;
+                    }
+        
+                    .text{
+                        padding: 0;
+                        margin: auto;
+                        justify-content: center;
+    
+                        h3{
+                            margin: 10px 0;
+                        }
+        
+                        .tagContainer{
+                            flex-wrap: wrap;
+                            flex-direction: row;
+                            justify-content: center;
+
+                            .tag{
+                                border: 1px solid var(--theme-dark);
+                                border-radius: 1em;
+                                margin: 5px 5px;
+                                padding: 5px 10px;
+                            }
+                        }
+                    }
+                }
+    
+                .expand{
+                    padding: 10px;
+                    background-color: var(--theme-dark);
+                    color: white;
+    
+                    h1{
+                        text-align: center;
+                        font-weight: var(--font-weight-normal);
+                    }
+    
+                    .members{
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: center;
+                        align-items: stretch;
+                        min-height: inherit;
+                        margin-bottom: 50px;
+
+                        .member{
+                            border: 1px solid var(--theme-light);
+                            padding: 2px 5px;
+                            margin: 5px 10px;
+                            min-width: 140px;
+                            min-height: 220px;
+                            text-align: center;
+                            justify-content: space-around;
+    
+                            .artForms{
+                                font-size: var(--font-size-s);
+                                font-weight: var(--font-weight-light);
+                            }
+    
+                            .links{ font-size: var(--font-size-xl) }
+                        }
+                    }
+    
+                    .divide{
+                        height: 1px;
+                        width: 100%;
+                        background-color: var(--theme-light);
+                    }
+    
+                    .projects{
+                        width: 100%;
+                        align-items: center;
+
+                        .project{
+                            width: 100%;
+    
+                            .projectEmbed{ iframe{ width: 100% } }
+    
+                            .projectGenre{ margin-bottom: 20px; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: $small-screen) {
+    .container{
+        .list{
+            .card{
+                .expand{    
+                    .members{
+                        .member{
+                            min-width: 120px;
+                            min-height: 160px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

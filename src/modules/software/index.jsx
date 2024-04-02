@@ -21,11 +21,12 @@ function SoftwareCard({ title, startDate, endDate, tech_stack, picture, descript
         </div>
         <div className={'swcExpand flex-column'}>
             <CardExpand open={open} onClick={() => setOpen(!open)}/>
-            {open ? <div className={'swceDivider'}></div> :<></>}
-            {
-                open 
-                ? <div className={'swceBody flex'}>
-                    <img src={picture} className="swcebImage" alt={`${title}Pic`} />
+            {open && <>
+                <div className={'swceDivider'}></div>
+                <div className={'swceBody flex'}>
+                    <div className="swcebImage">
+                        <img src={picture} alt={`project`} />
+                    </div>
                     <div className={"swcebContent"}>
                         <div className={"swceSection"}>
                             <h4 className={"swcesHeading"}>Project</h4>
@@ -42,8 +43,7 @@ function SoftwareCard({ title, startDate, endDate, tech_stack, picture, descript
                         </div>
                     </div>
                 </div>
-                : <></>
-            }
+            </> }
         </div>
     </div>
 }

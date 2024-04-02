@@ -12,7 +12,8 @@
                     height: 100px;
                     margin-right: 35px;
                     border: 1px solid gray;
-                    object-fit: cover;
+                    object-fit: contain;
+                    background-color: white;
                 }
 
                 .wchTitle{
