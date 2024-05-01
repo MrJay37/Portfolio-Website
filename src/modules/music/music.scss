@@ -1,18 +1,13 @@
 @import '../../styles/utils.scss';
 
 .musicContainer{
-    .mucList{
-        max-width: 1128px;
-        margin: auto;
-
-        .muclCard{
-            font-family: 'Source Sans Pro';
+    .mcList{
+        .mclCard{
             border: var(--theme-dark) solid 2px;
-            position: relative;
             padding: 0;
             
-            .muclcHeader{
-                .muclchPoster{
+            .mclcHeader{
+                .mclchPoster{
                     max-width: 60%;
                 }
     
@@ -27,6 +22,8 @@
     
                     .muclchtTagContainer{
                         flex-wrap: wrap;
+                        margin-bottom: 20px;
+
                         .muclchttcTag{
                             border: 1px solid var(--theme-dark);
                             border-radius: 1em;
@@ -34,7 +31,6 @@
                             padding: 5px 15px;
                         }
                     }
-
                 }
             }
 
@@ -131,44 +127,52 @@
     }
 }
 
+.leftGrid{
+    flex-direction: row;
+}
+
+.rightGrid{
+    flex-direction: row-reverse;
+}
+
 @media (max-width: $medium-screen) {
-    .container{
-        .list{
-            .card{
-                font-family: 'Source Sans Pro';
-                border: var(--theme-dark) solid 1px;
+    .musicContainer{
+        .mcList{
+            .mclCard{
+                border: var(--theme-dark) solid 2px;
+                padding: 0;
                 
-                .header{
-                    .poster{
+                .mclcHeader{
+                    .mclchPoster{
                         max-width: 100%;
                     }
         
-                    .text{
-                        padding: 0;
-                        margin: auto;
-                        justify-content: center;
-    
+                    .muclchText{
+                        padding: 0 50px;
+                        text-align: center;
+                        
                         h3{
-                            margin: 10px 0;
+                            font-size: var(--heading-2-font-size);
+                            font-family: 'Fjalla One';
                         }
         
-                        .tagContainer{
+                        .muclchtTagContainer{
                             flex-wrap: wrap;
-                            flex-direction: row;
                             justify-content: center;
 
-                            .tag{
+                            .muclchttcTag{
                                 border: 1px solid var(--theme-dark);
                                 border-radius: 1em;
-                                margin: 5px 5px;
-                                padding: 5px 10px;
+                                margin: 6px 6px;
+                                padding: 5px 15px;
                             }
                         }
+    
                     }
                 }
     
-                .expand{
-                    padding: 10px;
+                .muclcExpand{
+                    padding: 50px;
                     background-color: var(--theme-dark);
                     color: white;
     
@@ -177,70 +181,94 @@
                         font-weight: var(--font-weight-normal);
                     }
     
-                    .members{
+                    .muclceMembers{
                         flex-wrap: wrap;
                         align-items: center;
                         justify-content: center;
                         align-items: stretch;
-                        min-height: inherit;
+                        min-height: 250px;
                         margin-bottom: 50px;
-
-                        .member{
+    
+                        .muclcemMember{
                             border: 1px solid var(--theme-light);
-                            padding: 2px 5px;
-                            margin: 5px 10px;
-                            min-width: 140px;
+                            padding: 5px 10px;
+                            margin: 10px;
                             min-height: 220px;
+                            max-width: 140px;
                             text-align: center;
                             justify-content: space-around;
     
-                            .artForms{
-                                font-size: var(--font-size-s);
-                                font-weight: var(--font-weight-light);
+                            h4{
+                                font-weight: var(--font-weight-normal);
+                                font-size: var(--font-size-l);
+                                margin: 10px 0 0;
                             }
     
-                            .links{ font-size: var(--font-size-xl) }
+                            .muclcemmArtForms{
+                                justify-self: flex-start;
+                                justify-content: flex-start;
+                            }
+    
+                            .muclcemmLinks{
+                                padding: 0 10%;
+                                font-size: var(--font-size-xl);
+                                justify-content: space-around;
+                                justify-self: flex-end;
+                                a{
+                                    color: inherit
+                                };
+                            }
+                            
                         }
                     }
     
-                    .divide{
+                    .muclceDivide{
                         height: 1px;
                         width: 100%;
                         background-color: var(--theme-light);
                     }
     
-                    .projects{
+                    .muclceProjects{
                         width: 100%;
                         align-items: center;
-
-                        .project{
+    
+                        .muclcepProject{
                             width: 100%;
     
-                            .projectEmbed{ iframe{ width: 100% } }
+                            .muclceppEmbed{
+                                width: 100%;
     
-                            .projectGenre{ margin-bottom: 20px; }
+                                iframe{
+                                    width: 50%;
+                                    min-height: 300px;
+                                    margin: auto
+                                }
+                            }
+    
+                            .muclceppTitle{
+                                margin-top: 10px;
+                                font-size: var(--heading-3-font-size);
+                                text-align: center;
+                            }
+    
+                            .muclceppGenre{
+                                width: 100%;
+                                text-align: center;
+                                margin: 10px 0;
+                                margin-bottom: 50px;
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
 
-
-@media (max-width: $small-screen) {
-    .container{
-        .list{
-            .card{
-                .expand{    
-                    .members{
-                        .member{
-                            min-width: 120px;
-                            min-height: 160px;
-                        }
-                    }
-                }
-            }
-        }
+    .leftGrid{
+        flex-direction: column;
     }
+    
+    .rightGrid{
+        flex-direction: column;
+    }   
 }

@@ -17,68 +17,62 @@ function DocItem({ text, url, docButtonText }) {
     return <div className={'ccddbdItem'}>
         <div className={'ccddbdiText'}>{text}</div>
         <div className={'ccddbdiBtn flex'}>
-            <a target="_blank" href={url}>{docButtonText}</a>
+            <a target="_blank" rel="noreferrer" href={url}>{docButtonText}</a>
         </div>
     </div>
 }
 
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
 export default function Contact(){
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('')
-    const [error, setError] = useState(null)
+    // Form
+    const [values, setValues] = useState({})
+
+    // Validation
+    const [error, setError] = useState({})
+
+    // Notification
     const [showNotification, setShowNotification] = useState(false)
-    const [notificationMessage, setNotificationMessage] = useState('')
+    const [notificationMessage, setNotificationMessage] = useState(null)
+
+    // Loading
     const [waiting, setWaiting] = useState(false)
 
     const sendMessage = async (evt) => {
         setShowNotification(false)
         evt.preventDefault()
 
-        let errors = []
+        let errObj = {}
         
-        if (name.trim() == ''){
-            errors.push('name')
+        if (!values.name || values.name.trim() === "") errObj.name = 'Enter valid name'
+
+        if (!values.email || values.email.trim() === '' || !values.email.trim().match(EMAIL_REGEX)) 
+            errObj.email = 'Enter valid email'
+
+        if (!values.message || values.message.trim() === '') errObj.message = 'Enter proper message'
+
+        if (Object.keys(errObj).length > 0) {
+            setError(errObj)
+            return
         }
 
-        if (email.trim() == ''){
-            errors.push('email')
-        }
-
-        if (message.trim() == ''){
-            errors.push('message')
-        }
-
-        if (errors.length > 0){
-            setNotificationMessage('Please provide valid ' + errors.join(', '))
-            setError(true) 
-        }
-
-        else{
-            setWaiting(true)
-            let res = await fetch(
-                process.env.REACT_APP_FORM_API_URL,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        'name': name,
-                        'email': email,
-                        'message': message
-                    })
-                }
-            )
-            let data = await res.json()
-            setWaiting(false)
-            let res_message = JSON.parse(data['body'])
-            
-            setNotificationMessage(res_message['message'])
-            setName('')
-            setEmail('')
-            setMessage('')
-        }
+        setWaiting(true)
+        let res = await fetch(
+            process.env.REACT_APP_FORM_API_URL,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            }
+        )
+        let data = await res.json()
+        setWaiting(false)
+        let res_message = JSON.parse(data['body'])
+        
+        setNotificationMessage(res_message['message'])
+        setValues({})
 
         setShowNotification(true)
         
@@ -108,9 +102,10 @@ export default function Contact(){
                         id={"contactFormName"} 
                         className={'cccfiField'} 
                         placeholder="What can I call you?" 
-                        onChange={evt => setName(evt.target.value)} 
-                        value={name} 
+                        onChange={({ target: { value }}) => setValues({...values, name: value})} 
+                        value={values.name || ''} 
                     />
+                    {error.name ? <span>{error.name}</span>: <></>}
                 </div>
                 <div className={'cccfItem'}>
                     <label 
@@ -123,9 +118,10 @@ export default function Contact(){
                         id="contactFormName" 
                         className={'cccfiField'} 
                         placeholder="I'll reply back on this" 
-                        onChange={evt => setEmail(evt.target.value)} 
-                        value={email} 
+                        onChange={({ target: { value }}) => setValues({...values, email: value})} 
+                        value={values.email || ''} 
                     />
+                    {error.email ? <span>{error.email}</span>: <></>}
                 </div>
                 <div className={'cccfItem'}>
                     <label 
@@ -137,9 +133,10 @@ export default function Contact(){
                     <textarea 
                         id="contactFormName" 
                         className={'cccfiTextarea'} 
-                        onChange={evt => setMessage(evt.target.value)} 
-                        value={message} 
+                        onChange={({ target: { value }}) => setValues({...values, message: value})} 
+                        value={values.message || ''} 
                     />
+                    {error.message ? <span>{error.message}</span>: <></>}
                 </div>
                 {!waiting ? <button className={'cccfSubmitBtn'} type='submit'>
                     Send
@@ -162,15 +159,15 @@ export default function Contact(){
                 </div>
             </div>
         </div>
-        <div className={'contactFooter flex-center-align'}>
+        <div className={'contactFooter flex alignCenter'}>
             <div className={'cfTrademark'}>
-                &#169; 2022 Sanket Jain 
+                &#169; 2024 Sanket Jain 
             </div>
             <div className={'cfSocials'}>
-                <span><a target="_blank" href="https://www.linkedin.com/in/sanket-jain-415a606a/"><AiFillLinkedin /></a></span>
-                <span><a target="_blank" href="https://github.com/MrJay37"><AiFillGithub/></a></span>
-                <span><a target="_blank" href="https://www.youtube.com/channel/UC4QOttreVJ4zN6W1uBjtHIQ"><AiFillYoutube /></a></span>
-                <span><a target="_blank" href="https://www.instagram.com/abagauss/"><AiFillInstagram /></a></span>
+                <span><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/sanket-jain-415a606a/"><AiFillLinkedin /></a></span>
+                <span><a target="_blank" rel="noreferrer" href="https://github.com/MrJay37"><AiFillGithub/></a></span>
+                <span><a target="_blank" rel="noreferrer" href="https://www.youtube.com/channel/UC4QOttreVJ4zN6W1uBjtHIQ"><AiFillYoutube /></a></span>
+                <span><a target="_blank" rel="noreferrer" href="https://www.instagram.com/abagauss/"><AiFillInstagram /></a></span>
             </div>
         </div>
     </div>

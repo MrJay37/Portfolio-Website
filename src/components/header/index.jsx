@@ -30,11 +30,10 @@ const menu = [
 	}
 ]
 
-
 function NavigationGroup() {
-	return <div className={'navigationMenu flex'}>
-		{menu.map(({to, displayText, id}) => (
-			<a key={id} href={to} className="navigationMenuOption headerLink">
+	return <div className={'hccNavMenu flex'}>
+		{menu.map(({ to, displayText, id }) => (
+			<a key={id} href={to} className="hccnNavMenuOption headerLink">
 				{displayText}
 			</a>
 		))}
@@ -42,27 +41,28 @@ function NavigationGroup() {
 }
 
 function DrawerNavigation({ onClick }) {
-	return <div className={'navigationDrawer flex-column'}>
-		{menu.map(({to, displayText, id}) => (
-            <a key={id} href={to} className="navigationMenuOption headerLink" onClick={onClick} >
-                {displayText}
-            </a>
-		))}
-    </div>
+	return <div className='hccNavDrawer' onClick={onClick} >
+		<div className={'hccndOptions fullWidth flex-column'}>
+			{menu.map(({ to, displayText, id }) => (
+				<a key={id} href={to} className="hccnNavMenuOption headerLink" >
+					{displayText}
+				</a>
+			))}
+		</div>
+	</div>
 }
 
 export default function Header() {
-    
 	const [drawer, showDrawer] = useState(false)
 
 	const closeDrawer = () => showDrawer(!drawer)
 
-	return <div className={'headerContainer flex-center-align fullWidth'}>
-		<div className={'headerContent flex-center-align fullWidth'}>
-			<a className={"headerAvatar headerLink"} href='/'>Sanket Jain</a>
+	return <div className={'headerContainer flex alignCenter fullWidth'}>
+		<div className={'hcContent flex alignCenter fullWidth'}>
+			<a className={"hccAvatar flex headerLink"} href='/'>Sanket Jain</a>
 			<NavigationGroup />
-			<span className={'headerDrawerButton'}>
-				<HambugerButton clicked={drawer} onClick={closeDrawer}/>
+			<span className={'hccDrawerButton'}>
+				<HambugerButton clicked={drawer} onClick={closeDrawer} />
 			</span>
 			{drawer ? <DrawerNavigation onClick={closeDrawer} /> : <></>}
 		</div>

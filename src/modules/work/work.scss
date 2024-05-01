@@ -1,53 +1,58 @@
 @import '../../styles/utils.scss';
 
 .workContainer{
-    .workList{
-        .workCard{
-            .workCardHeader{
+    .wcList{
+        .wclCard{
+            .wclcHeader{
+                display: grid;
+                grid-template-columns: 3fr 1fr;
                 font-family: 'Source Sans Pro';
                 align-items: center;
+                margin-bottom: 10px;
                 
-                .wchLogo{
-                    width: 200px;
-                    height: 100px;
-                    margin-right: 35px;
-                    border: 1px solid gray;
-                    object-fit: contain;
-                    background-color: white;
+                .wclchLogo{
+                    justify-content: flex-end;
+
+                    img{
+                        width: 300px;
+                        height: 150px;
+                        border: 1px solid gray;
+                        object-fit: contain;
+                        background-color: white;
+                    }
                 }
 
-                .wchTitle{
-                    font-size: var(--heading-3-font-size);
-                    font-weight: var(--font-weight-normal);
+                .wclchTitle{
+                    font-size: var(--heading-2-font-size);
+                    font-weight: var(--font-weight-lighter);
+                    padding-right: 30px;
                 }
             }
 
-            .workCardBody{
+            .wclcBody{
                 padding: 20px 0;
                 font-family: 'Source Sans Pro';
 
-                .wcbDivider{
+                .wclcbDivider{
                     height: 1px;
                     background-color: var(--theme-medium-light);
                 }
 
-                .wPositionCards{
-                    margin: 20px auto;
-
-                    .wPositionCard{
-                        .wPositionTitle{
+                .wclcbPositionCards{
+                    .wclcbpcCard{
+                        .wclcbpccTitle{
                             font-size: var(--font-size-l);
                             font-weight: var(--font-weight-normal);
-                            margin: 0;
+                            margin: 0 0 10px;
                         }
 
-                        .wPositionSubtitle{
+                        .wclcbpccSubtitle{
                             font-size: var(--font-size-m);
                             font-weight: var(--font-weight-normal);
-                            margin: 0;
+                            margin: 0 0 10px;
                         }
 
-                        .wPositionDuties{
+                        .wclcbpccDuties{
                             font-size: var(--font-size-m);
                         }
                     }
@@ -63,23 +68,40 @@
 }
 
 
+@media (max-width: $medium-screen) {
+    .workContainer{
+        .wcList{
+            .wclCard{
+                .wclcHeader{
+                    grid-template-columns: 2fr 1fr;
+    
+                    .wclchTitle{
+                        font-weight: var(--font-weight-normal);
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: $small-screen){
-    .workContainer{    
-        .workList{
-            .workCard{
-                .workCardHeader{
-                    .title{                        
-                        .text{
-                            h1{margin: 2px 0 }
-                
-                            h3{ margin: 3px 0 }
-        
-                            p{ margin: 7px 0 }
+    .workContainer{
+        .wcList{
+            .wclCard{
+                .wclcHeader{
+                    .wclchLogo{
+                        img{
+                            width: 145px;
+                            height: 72.5px;
                         }
+                    }
+
+                    .wclchTitle{
+                        font-size: var(--font-size-l);
                     }
                 }
     
-                .cardBody{
+                .wclcBody{
                     padding: 20px 0;
                     font-family: 'Source Sans Pro';
                     font-size: var(--font-size-m);

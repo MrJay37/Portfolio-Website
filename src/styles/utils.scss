@@ -1,8 +1,64 @@
 // VARIABLE VALUES DO NOT CHANGE
-$medium-screen: 1280px;
+$medium-screen: 1024px;
 $small-screen: 600px;
 
 
-.success_background{ background-color: green }
+.success_background {
+    background-color: green
+}
 
-.error_background{ background-color: red }
+.error_background {
+    background-color: red
+}
+
+// display: flex styling classNames
+.flex {
+    display: flex
+}
+
+.alignCenter {
+    align-items: center
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column
+}
+
+.flex-column-center-align {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+}
+
+.section {
+    width: 100%;
+    margin: var(--header-height) auto
+}
+
+.sectionContainer {
+    width: 80%;
+    max-width: var(--max-container-width);
+    margin: auto;
+    padding: 20px 0;
+}
+
+.sectionTitle {
+    padding: var(--header-height) 0 0;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-family: 'Fjalla One';
+    font-size: var(--heading-1-font-size);
+    font-weight: var(--font-weight-normal);
+}
+
+.lightThemeSection {
+    background-color: var(--theme-light);
+    color: var(--font-color-black);
+}
+
+.cursorPointer{
+    cursor: pointer;
+}

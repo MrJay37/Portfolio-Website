@@ -1,14 +1,16 @@
 @import '../../styles/utils.scss';
 
+
 .swContainer{
-    .swList{
-        .swCard{
+    .swcList{
+        .swclCard{
             border: var(--theme-light) solid 2px;
             font-family: 'Source Sans Pro';
             
-            .swcMain{
-                .swcmHeader{
-                    justify-content: space-between;
+            .swclcMain{
+                .swclcmHeader{
+                    display: grid;
+                    grid-template-columns: 4fr 1fr;
     
                     h3{
                         font-size: var(--heading-3-font-size);
@@ -17,11 +19,12 @@
                     }
     
                     span{
+                        text-align: right;
                         font-size: var(--font-size-m);
                     }
                 }
                 
-                .swcmTechStackTags{
+                .swclcmTags{
                     margin: 10px 0 0;
                     flex-wrap: wrap;
                     
@@ -36,38 +39,30 @@
                 }
             }
 
-            .swcExpand{
+            .swclcExpand{
                 margin-top: 20px;
-                width: 100%;
-                align-items: center;
 
-                .swceDivider{
+                .swclceDivider{
                     margin-top: 10px;
                     height: 1px;
                     width: 100%;
                     background-color: var(--theme-light);
                 }
 
-                .swceBody{
+                .swclceBody{
                     margin-top: 20px;
+                    display: grid;
+                    grid-template-columns: 3fr 5fr;
 
-                    .swcebImage{
-                        min-width: 500px;
-                        max-width: 500px;
-
-                        img{
-                            width: 100%;
-                        }
-                    }
-
-                    .swcebContent{
+                    .swclcebContent{
                         padding: 0 20px;
 
-                        .swceSection{
+                        .swclcebcSection{
                             font-weight: var(--font-weight-light);
                         }
 
-                        .swcesHeading{
+                        .swclcebcHeading{
+                            font-size: var(--font-size-m);
                             font-weight: var(--font-weight-normal);
                             margin: 0;
                             padding: 0 0 5px 0;
@@ -77,80 +72,130 @@
                             text-decoration: none;
                             color:inherit;
                         }
-
-                        .swcesMember{
-                            padding: 0 0 3px 0;
-                            &:hover{
-                                text-decoration: underline;
+                        
+                        .swclcebchMembers{
+                            .swclcebchMember{
+                                display: inline;
+                                margin: 0 10px 0 0;
+                                font-weight: var(--font-weight-lighter);
+    
+                                &:hover { text-decoration: underline }
                             }
                         }
                     }
                 }
             }
-            
         }
     }
 }
 
-@media (max-width: $small-screen) {
+
+@media (max-width: $medium-screen) {
     .swContainer{
-        .list{
-            .card{
-                border: var(--theme-light) solid 1px;
-                font-family: 'Source Sans Pro';
+        .swcList{
+            .swclCard{
+                .swclcMain{
+                    .swclcmHeader{
+                        margin-bottom: 40px;
 
-                .main{             
-                    .header{
-                        justify-content: space-between;
+                        h3{
+                            font-size: var(--heading-2-font-size);
+                        }
         
-                        span{ text-align: right }
-                    }
-
-                    .techStackTags{
-                        justify-content: center;
-
                         span{
                             font-size: var(--font-size-m);
-                            font-weight: var(--font-weight-light);
+                        }
+                    }
+                    
+                    .swclcmTags{
+                        span{
+                            font-size: var(--font-size-m);
                         }
                     }
                 }
     
-                .expand{
-                    margin-top: 10px;
-        
-                    .expandBody{
-                        margin-top: 20px;
-                        flex-direction: column;
-                        align-items: center;
-    
-                        .expandBodyImage{
-                            width: 100%;
+                .swclcExpand{
+                    .swclceBody{
+                        grid-template-columns: 1fr;
+
+                        .swclcebImage{
+                            max-width: 60vw;
+                            margin: 0 auto 20px;
                         }
     
-                        .expandBodyContent{
+                        .swclcebContent{
                             padding: 0;
     
-                            .heading{
-                                font-size: var(--heading-3-font-size);
-                                font-weight: var(--font-weight-normal);
-                                padding: 5px 0;
+                            .swclcebcSection{
+                                font-weight: var(--font-weight-light);
+
+                                p{
+                                    font-size: var(--font-size-m);
+                                    text-align: justify;
+                                }
+                            }
+
+                            .swclcebcHeading{
+                                font-size: var(--font-size-l);
                                 text-align: center;
                             }
 
-                            p{ 
-                                text-align: justify;
-                                font-size: var(--font-size-m)
-                            }
-    
-                            .member{
-                                text-align: center;
-                                padding: 0 0 3px 0;
-                                font-weight: var(--font-weight-light);
-                                font-size: var(--font-size-m);
-                                &:hover{ text-decoration: underline }
+                            .swclcebchMembers{
+                                .swclcebchMember{
+                                    display: block;
+                                    text-align: center;
+                                    margin: 5px auto;
+                                    font-size: var(--font-size-m);
+                                }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: $small-screen) {
+    .swContainer{
+        .swcList{
+            .swclCard{
+                .swclcMain{
+                    .swclcmHeader{
+                        display: block;
+                        margin-bottom: 20px;
+
+                        h3{
+                            font-size: var(--font-size-l);
+                        }
+        
+                        span{
+                            font-size: var(--font-size-m);
+                        }
+                    }
+                    
+                    .swclcmTags{
+                        span{
+                            font-size: var(--font-size-s);
+                        }
+                    }
+                }
+    
+                .swclcExpand{
+                    margin-top: 20px;
+                    width: 100%;
+                    align-items: center;
+    
+                    .swclceDivider{
+                        margin-top: 10px;
+                        height: 1px;
+                        width: 100%;
+                        background-color: var(--theme-light);
+                    }
+    
+                    .swclceBody{
+                        .swclcebImage{ max-width: 100% }
                     }
                 }
             }

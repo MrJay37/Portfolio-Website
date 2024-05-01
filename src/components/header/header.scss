@@ -1,7 +1,7 @@
 @import '../../styles/utils.scss';
 
 
-.headerContainer{
+.headerContainer {
     position: fixed;
     top: 0;
     height: var(--header-height);
@@ -9,68 +9,89 @@
     background-color: var(--theme-dark);
     border-bottom: 1px solid var(--theme-light);
 
-    .headerContent{
+    .hcContent {
         margin: auto 1%;
-        font-weight: var(--font-weight-light);
         justify-content: space-between;
+
+        font-weight: var(--font-weight-light);
         font-size: var(--font-size-m);
 
-        .headerAvatar { &:hover { cursor: pointer } }
-        
-        .navigationMenu {
-            .navigationMenuOption{
+        .hccNavMenu {
+            .hccnNavMenuOption {
                 margin: 0px 18px;
-                
-                &:hover{ cursor: pointer }
             }
         }
-    
-        .headerDrawerButton, .navigationDrawer{ display: none;}
+
+        .hccDrawerButton,
+        .hccNavDrawer {
+            display: none;
+        }
     }
 }
 
-.headerLink{
+.headerLink {
     color: white;
     text-decoration: none;
 }
 
+@media (max-width: $medium-screen) {
+    .headerContainer {
+        .hcContent {
+            width: 95%;
+            margin: auto;
+
+            .hccNavMenu {
+                .hccnNavMenuOption {
+                    margin: 0px 12px;
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: $small-screen) {
-    .container{
-        width: 100%;
-        .content{
-            .avatar { 
-                display: flex;
+    .headerContainer {
+        .hcContent {
+            width: 95%;
+            margin: auto;
+
+            .hccAvatar {
                 justify-content: space-between;
-                width: 100%;
-                font-size: var(--font-size-xl); 
+                font-size: var(--font-size-xl);
             }
 
-            .navigationMenu{ display: none }
+            .hccNavMenu {
+                display: none
+            }
 
-            .drawerButton{ display: block }
+            .hccDrawerButton {
+                display: block;
+            }
 
-            .navigationDrawer{
+            .hccNavDrawer {
                 position: fixed;
-                top: var(--header-height);
+                top: 0;
                 left: 0;
                 right: 0;
-                width: 100%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-                background-color: var(--theme-dark);
                 z-index: 1;
+
                 // Must be here to override the display: none value from large screen
                 display: flex;
-                margin: 0;
-                padding: 0;
-                    
-                .navigationMenuOption{
-                    font-family: inherit;
-                    width: 100%;
-                    margin: 0;
-                    padding: 10px calc((100% - var(--header-width))/2);
-                    border-top: 0.5px solid var(--theme-light);
-                }
+                height: 100vh;
 
+                .hccndOptions{
+                    margin-top: var(--header-height);
+                    height: fit-content;
+
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+                    background-color: var(--theme-dark);
+                    
+                    .hccnNavMenuOption {
+                        font-size: var(--font-size-l);
+                        padding: 10px;
+                        border-top: 0.5px solid var(--theme-light);
+                    }
+                }                
             }
         }
     }

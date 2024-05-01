@@ -12,7 +12,6 @@ export default function About() {
     const [aboutData, setAboutData] = useState(null);
     const [bannerPicUrl, setBannerPicUrl] = useState(null)
     const [myPicUrl, setMyPicUrl] = useState(null)
-    const [skills, setSkills] = useState([])
 
     useEffect(() => {
         if (process.env.REACT_APP_ENV === 'DEV'){
@@ -20,74 +19,56 @@ export default function About() {
                 .then(data => data.text())
                 .then(res => JSON.parse(res))
                 .then(res => {
-                    setAboutData(res.about);
-                    setBannerPicUrl(res.about.bannerPic);
-                    setMyPicUrl(res.about.myPic);
-                    setSkills(res.about.skills)
+                    setAboutData(res.intro[0]);
+                    setBannerPicUrl(urlFor(res.intro[0].bannerPic).url());
+                    setMyPicUrl(urlFor(res.intro[0].myPic).url());
                 })
         }  
         else{
             sanityClient
-                .fetch(
-                    `*[_type == "about"]{
-                        intro,
-                        bannerPic,
-                        myPic,
-                        skills
-                    }`
-                )
+                .fetch(`*[_type == "about"]`)
                 .then((data) => {
-                    console.log(data[0].skills);
                     setAboutData(data[0]);
                     setBannerPicUrl(urlFor(data[0].bannerPic).url());
                     setMyPicUrl(urlFor(data[0].myPic).url());
-                    setSkills(data[0].skills.map(s => ({title: s.technique, value: s.value})));
                 })
                 .catch(console.error); 
         }    
     }, []);
 
-    return <div className={'aboutContainer light_theme_section section'}>
-        <img className={'aboutBanner'} src={bannerPicUrl} alt='banner' />
-        <div className={'aboutBannerText flex-center-align'}>
+    return <div className={'aboutContainer lightThemeSection section'}>
+        <img className={'acBanner'} src={bannerPicUrl} alt='banner' />
+        <div className={'acbText flex alignCenter'}>
             <h1>Hi! I make music and software</h1>
         </div>
-        <div className={'aboutIntro sectionContainer'}>
-            <div className={'aboutIntroContainer flex'}>
-                <div className={'aboutIntroText flex-column-center-align'}>
+        <div className={'acIntro sectionContainer'}>
+            <div className={'aciContainer flex'}>
+                <div className={'aciText flex-column-center-align'}>
                     <h3>Who I Am?</h3>
                     {aboutData && aboutData.intro.split('\n').map((intro, i) => (
-                        <p key={i} className={'aboutIntroText normal-text'}>
+                        <p key={i} className={'aciText normal-text'}>
                             {intro}
                         </p>
                     ))}
                 </div>
-                <div className={'aboutIntroProfilePicture flex'}>
+                <div className={'aciProfilePicture fullWidth flex alignCenter'}>
                     <img src={myPicUrl} alt='me'/>
                 </div>
             </div>
-            <div className={'aboutIntroBarContainer flex-column-center-align barChart'}>
+            <div className={'aciBarContainer flex-column-center-align barChart'}>
                 <h3>What do I know?</h3>
                 <Bar
-                    data={
-                        {
-                            labels: skills.map((s, i) => s.title),
-                            datasets: [
-                                {
-                                    data: skills.map((s, i) => s.value),
-                                    backgroundColor: skills.map((s, i) => `rgba(33, 33, 33, ${s.value})`),
-                                    borderWidth: 1
-                                }
-                            ]
-                        }
-                    } 
-                    options={{
-                        scales: {
-                            y: {
-                                display: false
-                            }
-                        }
-                    }}
+                    data={{
+                        labels: ((aboutData || {}).skills || []).map((s, i) => s.technique),
+                        datasets: [{
+                            data: ((aboutData || {}).skills || []).map((s, i) => s.value),
+                            backgroundColor: ((aboutData || {}).skills || []).map((s, i) => (
+                                `rgba(33, 33, 33, ${s.value})`
+                            )),
+                            borderWidth: 1
+                        }]
+                    }} 
+                    options={{scales: {y: { display: false }}}}
                 />
             </div>
             

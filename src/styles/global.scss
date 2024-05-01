@@ -14,7 +14,7 @@ html, body {
 
 // Global variables
 :root{
-  // Device dimensions
+  // Device dimensionsk
   --small-screen: 600px;
   --medium-screen: 1280px;
 
@@ -45,6 +45,7 @@ html, body {
 
   // Font weights
   --font-weight-light: 100;
+  --font-weight-lighter: 300;
   --font-weight-normal: 400;
   --font-weight-heavy: 700;
   
@@ -60,44 +61,8 @@ html, body {
   --font-size-xs: 12px;
 }
 
-// ClassName base CSS Rules
-.flex{ display: flex }
+// Section classes
 
-.flex-center-align{ display: flex; align-items: center }
-
-.flex-column { display: flex; flex-direction: column }
-
-.flex-column-center-align{
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  align-items: center;
-}
-
-.section{ width: 100%; margin: var(--header-height) auto }
-
-.sectionContainer{
-  width: 80%;
-  max-width: var(--max-container-width);
-  margin: auto;
-  padding: 20px 0;
-}
-
-.sectionTitle{
-  padding: var(--header-height) 0 0;
-  width: 80%;
-  margin: auto;
-  text-align: center;
-  font-family: 'Fjalla One';
-  font-size: var(--heading-1-font-size);
-  font-weight: var(--font-weight-normal);
-  
-}
-
-.light_theme_section {
-  background-color: var(--theme-light);
-  color: var(--font-color-black);
-}
 
 .normal-text{
   text-align: justify;
@@ -148,7 +113,6 @@ html, body {
     --max-container-width: 1000px;
 
     // Dimensions
-    --header-height: 48px;
     --vertical-spacing-margin: 30px auto;
     --card-content-padding: 15px 20px;
     --contact-form-input-width: 80%;
@@ -159,12 +123,13 @@ html, body {
     --heading-1-font-size: 72px;
     --heading-2-font-size: 36px;
     --heading-3-font-size: 24px;
-    --font-size-xl: 28px;
-    --font-size-l: 20px;
-    --font-size-m: 18px;
+    --font-size-xl: 32px;
+    --font-size-l: 28px;
+    --font-size-m: 24px;
     --font-size-s: 14px;
     --font-size-xs: 10px;
   }
+
   .cardRight{
     flex-direction: column;
   }
@@ -185,7 +150,6 @@ html, body {
 
 @media (max-width: $small-screen) {
   :root{
-    --header-height: 45px;
     --header-width: 95%;
     --profile-picture-max-height: 400px;
 
@@ -193,9 +157,9 @@ html, body {
     --heading-1-font-size: 60px;
     --heading-2-font-size: 30px;
     --heading-3-font-size: 20px;
-    --font-size-xl: 18px;
-    --font-size-l: 14px;
-    --font-size-m: 12px;
+    --font-size-xl: 28px;
+    --font-size-l: 18px;
+    --font-size-m: 14px;
     --font-size-s: 10px;
     --font-size-xs: 8px;
 
@@ -204,6 +168,10 @@ html, body {
 
     --max-container-width: 100%;
     
+  }
+
+  .sectionContainer{
+    width: 90%;
   }
 
   .sectionTitle{

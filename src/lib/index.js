@@ -13,7 +13,7 @@ const months = {
     12: 'Dec'
 }
 
-export const formatToYearMonth = (date_obj) => {
+export const formatToYearMonth = (date_obj, includeDay=false) => {
     if (!date_obj) return 'now';
 
     let year, month, day;
@@ -29,6 +29,6 @@ export const formatToYearMonth = (date_obj) => {
     }
 
     
-
-    return `${year} ${months[parseInt(month)]}`
+    if (!includeDay) return `${year} ${months[parseInt(month)]}`
+    else return `${year} ${months[parseInt(month)]} ${day}`
 }

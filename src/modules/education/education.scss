@@ -1,50 +1,42 @@
 @import '../../styles/utils.scss';
 
 .eduContainer{
-    .eduList{
+    .ecList{
         margin-top: 20px;
         border-left: 1px dashed white;
         
-        .eduCard{
-            justify-content: space-between;
-            font-family: 'Source Sans Pro';
+        .eclCard{
+            display: grid;
+            grid-template-columns: 1fr 4fr;
             margin: 10px 0;
-            position: relative;
 
-            .eduDates{
+            .eclcDates{
                 justify-content: space-between;
-                width: 10%;
             }
             
-            .eduSchool{
-                width: 90%;
-                justify-content: flex-end;
-                max-height: 200px;
+            .eclcSchool{
+                text-align: right;
 
-                .eduText{
-                    text-align: right;
+                a{
+                    color: inherit;
+                    text-decoration: none;
+                }
+                
+                h1{
+                    font-size: var(--heading-3-font-size);
+                    font-weight: var(--font-weight-normal);
+                    margin: 0 0 10px 0;
+                }
 
-                    a{
-                        color: inherit;
-                        text-decoration: none;
-                    }
-                    
-                    h1{
-                        font-size: var(--heading-3-font-size);
-                        font-weight: var(--font-weight-normal);
-                        margin: 0 0 10px 0;
-                    }
+                h3{
+                    margin: 0;
+                    font-size: var(--font-size-l);
+                    font-weight: var(--font-weight-light);
+                }
 
-                    h3{
-                        margin: 0;
-                        font-size: var(--font-size-l);
-                        font-weight: var(--font-weight-light);
-                    }
-
-                    p {
-                        font-size: var(--font-size-m);
-                        font-weight: var(--font-weight-light);
-                    }
+                p {
+                    font-size: var(--font-size-m);
+                    font-weight: var(--font-weight-light);
                 }
             }
         }
@@ -53,15 +45,30 @@
 
 @media (max-width: $medium-screen) {
     .eduContainer{
-        .eduList{
-            .eduCard{
-                .eduDates{
-                    font-size: var(--font-size-s);
-                    justify-content: space-between;
-                    width: 20%;
+        .ecList{
+            .eclCard{
+                .eclcDates{
+                    font-size: var(--font-size-m);
                 }
-                
-                .eduSchool{ width: 80%; }
+            }
+        }
+    }
+}
+
+
+@media (max-width: $small-screen) {
+    .eduContainer{
+        .ecList{
+            .eclCard{
+                .eclcSchool{                                            
+                    h1{
+                        font-size: var(--font-size-l);
+                    }
+    
+                    h3{
+                        font-size: var(--font-size-m);
+                    }
+                }
             }
         }
     }

@@ -1,19 +1,19 @@
 @import '../../styles/utils.scss';
 
-.aboutContainer{
-    .aboutBanner{
+.aboutContainer {
+    .acBanner {
         width: inherit;
         display: block;
         object-fit: cover;
         height: calc(100vh - 3 * var(--header-height));
     }
 
-    .aboutBannerText{
+    .acbText {
         height: calc(2 * var(--header-height));
         background-color: var(--theme-medium-light);
         justify-content: center;
 
-        h1{
+        h1 {
             font-family: 'Fjalla One';
             text-align: center;
             font-size: var(--heading-2-font-size);
@@ -21,26 +21,29 @@
             text-transform: uppercase;
             margin: 0;
         }
-        
+
     }
 
-    .aboutIntro{
-        h3{
+    .acIntro {
+        h3 {
             font-weight: var(--font-weight-normal);
             font-size: var(--heading-2-font-size);
             font-family: 'Source Sans Pro';
         }
 
-        .aboutIntroContainer{
+        .aciContainer {
             margin-top: 40px;
-            .aboutIntroText{
+
+            .aciText {
                 padding: 0 5%;
 
-                p{ font-size: var(--font-size-m) }
+                p {
+                    font-size: var(--font-size-m)
+                }
             }
 
-            .aboutIntroProfilePicture{
-                img{
+            .aciProfilePicture {
+                img {
                     width: var(--profile-picture-width);
                     object-fit: cover;
                 }
@@ -49,27 +52,52 @@
     }
 }
 
-@media(max-width: 1080px){
-    .aboutContainer{
-        .aboutIntro{
-            .aboutIntroContainer{
+@media(max-width: 1080px) {
+    .aboutContainer {
+        .acIntro {
+            .aciContainer {
                 flex-direction: column-reverse;
 
-                .aboutText{ p { font-size: var(--font-size-s) } }
+                .aciText {
+                    padding: 0;
+                    p {
+                        font-size: var(--font-size-s)
+                    }
+                }
 
-                .profilePicture{
-                    margin-top: none;
-                    width: 80%;
-                    margin: auto;
+                .aciProfilePicture {
+
+                    img {
+                        width: 80%;
+                        margin: auto;
+                    }
                 }
             }
 
-            .aboutIntroBarContainer{ display: none }
+            .aciBarContainer {
+                display: none
+            }
         }
     }
 }
 
 
 @media (max-width: 600px) {
-    .container{ .intro{ .container{ .aboutText{ p{ font-size: var(--font-size-l) } } } } }
+    .aboutContainer {
+        .acIntro {
+            .aciContainer {
+                .aciText {
+                    p {
+                        font-size: var(--font-size-m);
+                    }
+                }
+
+                .aciProfilePicture {
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }
