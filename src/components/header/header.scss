@@ -1,74 +1,42 @@
 @import '../../styles/utils.scss';
 
+$header-height: 60px;
 
 .headerContainer {
     position: fixed;
     top: 0;
-    height: var(--header-height);
     z-index: 1;
+    height: $header-height;
     background-color: var(--theme-dark);
     border-bottom: 1px solid var(--theme-light);
 
-    .hcContent {
-        margin: auto 1%;
+    .headerContent {
+        margin: auto 20px;
         justify-content: space-between;
 
         font-weight: var(--font-weight-light);
         font-size: var(--font-size-m);
 
-        .hccNavMenu {
-            .hccnNavMenuOption {
-                margin: 0px 18px;
-            }
+        .headerAvatar{
+            font-size: var(--font-size-l);
         }
 
-        .hccDrawerButton,
-        .hccNavDrawer {
-            display: none;
-        }
+        .headerNavMenu { .navMenOpt { margin: 0px 18px } }
+
+        .headerDrawerBtn, .headerNavDrawer { display: none }
     }
 }
 
-.headerLink {
-    color: white;
-    text-decoration: none;
-}
+@media (max-width: $large-tab) {}
 
-@media (max-width: $medium-screen) {
-    .headerContainer {
-        .hcContent {
-            width: 95%;
-            margin: auto;
+@media (max-width: $small-tab) {
+    .headerContainer {   
+        .headerContent {
+            .headerNavMenu { display: none;}
+    
+            .headerDrawerBtn { display: block }
 
-            .hccNavMenu {
-                .hccnNavMenuOption {
-                    margin: 0px 12px;
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: $small-screen) {
-    .headerContainer {
-        .hcContent {
-            width: 95%;
-            margin: auto;
-
-            .hccAvatar {
-                justify-content: space-between;
-                font-size: var(--font-size-xl);
-            }
-
-            .hccNavMenu {
-                display: none
-            }
-
-            .hccDrawerButton {
-                display: block;
-            }
-
-            .hccNavDrawer {
+            .headerNavDrawer {
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -76,17 +44,16 @@
                 z-index: 1;
 
                 // Must be here to override the display: none value from large screen
-                display: flex;
+                display: block;
                 height: 100vh;
 
-                .hccndOptions{
-                    margin-top: var(--header-height);
+                .navDrawerMenu{                    
+                    margin-top: $header-height;
                     height: fit-content;
-
                     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
                     background-color: var(--theme-dark);
                     
-                    .hccnNavMenuOption {
+                    .navDrawerMenOpt {
                         font-size: var(--font-size-l);
                         padding: 10px;
                         border-top: 0.5px solid var(--theme-light);
@@ -95,4 +62,24 @@
             }
         }
     }
+}
+
+@media (max-width: $large-phone) {
+    .headerContainer {   
+        .headerContent {
+            .headerNavDrawer {
+                .navDrawerMenu{                                      
+                    .navDrawerMenOpt {
+                        font-size: var(--font-size-l);
+                        padding: 10px;
+                        border-top: 0.5px solid var(--theme-light);
+                    }
+                }                
+            }
+        }
+    }
+}
+
+@media (max-width: $small-phone) {
+    
 }

@@ -8,6 +8,10 @@ ChartJS.register(LinearScale, CategoryScale, BarElement);
 
 ChartJS.defaults.font.size = 16
 
+const SubTitle = ({ children}) => {
+    return <h3 className='introSubTitle'>{children}</h3>
+}
+
 export default function About() {
     const [aboutData, setAboutData] = useState(null);
     const [bannerPicUrl, setBannerPicUrl] = useState(null)
@@ -37,26 +41,26 @@ export default function About() {
     }, []);
 
     return <div className={'aboutContainer lightThemeSection section'}>
-        <img className={'acBanner'} src={bannerPicUrl} alt='banner' />
-        <div className={'acbText flex alignCenter'}>
-            <h1>Hi! I make music and software</h1>
+        <img className={'banner'} src={bannerPicUrl} alt='banner' />
+        <div className={'greeting flex alignCenter'}>
+            <h1 className='introSubTitle'>Hi! I make music and software</h1>
         </div>
-        <div className={'acIntro sectionContainer'}>
-            <div className={'aciContainer flex'}>
-                <div className={'aciText flex-column-center-align'}>
-                    <h3>Who I Am?</h3>
+        <div className={'aboutContent sectionContainer'}>
+            <div className={'intro flex'}>
+                <div className={'introText flex-column-center-align'}>
+                    <SubTitle>Who I Am?</SubTitle>
                     {aboutData && aboutData.intro.split('\n').map((intro, i) => (
-                        <p key={i} className={'aciText normal-text'}>
+                        <p key={i} className={'aciText'}>
                             {intro}
                         </p>
                     ))}
                 </div>
-                <div className={'aciProfilePicture fullWidth flex alignCenter'}>
+                <div className={'introPicture fullWidth flex alignCenter'}>
                     <img src={myPicUrl} alt='me'/>
                 </div>
             </div>
-            <div className={'aciBarContainer flex-column-center-align barChart'}>
-                <h3>What do I know?</h3>
+            <div className={'introCharContainer flex-column-center-align'}>
+                <SubTitle>What do I know?</SubTitle>
                 <Bar
                     data={{
                         labels: ((aboutData || {}).skills || []).map((s, i) => s.technique),

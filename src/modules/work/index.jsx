@@ -4,32 +4,40 @@ import { formatToYearMonth as dtFmt } from '../../lib'
 import { CardExpand } from '../../components'
 import { sanityClient, urlFor } from '../../lib/sanityClient'
 
+function PositionCard({posName, start, end, duties, location: {state, country}}){
+    return <div className={'workPositionCard cardBorder'}>
+        <h3 className='posTitle'>{posName}</h3>
+        <h4 className='posSubtitle'>{state}, {country}, {dtFmt(start)} to {dtFmt(end)}</h4>
+        {duties.length > 0 && <ul className='posDuties'>
+            {duties.map((duty, d) => <li key={d}>{duty}</li>)}
+        </ul>}
+    </div>
+}
 
 function WorkCard({ organization, url, logo, positions}) {
     const [open, setOpen] = useState(false)
 
 
-    return <div className={'wclCard cardBorder'}>
-        <div className={'wclcHeader'}>
-            <a href={url} target='_blank' rel="noreferrer" className='wclchTitle orgLink'>{organization}</a>
-            <div className='wclchLogo flex'>
-                <img src={logo} alt={`${organization}Logo`}/>
+    return <div className={'workCard cardBorder'}>
+        <div className={'workCardHeader'}>
+            <a 
+                href={url} 
+                target='_blank' 
+                rel="noreferrer" 
+                className='wcHeaderTitle removeTextFormat'
+            >
+                {organization}
+            </a>
+            <div className='workCardLogo flex'>
+                <img src={logo} alt={`${organization}Logo`} className='cardBorder'/>
             </div>
         </div>
         <CardExpand open={open} onClick={() => setOpen(!open)}/>
         {open && (
-            <div className={'wclcBody'}>
-                <div className={'wclcbDivider'} />
-                <div className='wclcbPositionCards'>
-                    {positions.map(({posName, start, end, duties, location: {state, country}}, px) => (
-                        <div key={px} className={'wclcbpcCard cardBorder'}>
-                            <h3 className='wclcbpccTitle'>{posName}</h3>
-                            <h4 className='wclcbpccSubtitle'>{state}, {country}, {dtFmt(start)} to {dtFmt(end)}</h4>
-                            {duties.length > 0 && <ul className='wclcbpccDuties'>
-                                {duties.map((duty, d) => <li key={d}>{duty}</li>)}
-                            </ul>}
-                        </div>
-                    ))}
+            <div className={'workCardBody'}>
+                <div className={'workCardDivider'} />
+                <div className='workPositions'>
+                    {positions.map((pos, px) => <PositionCard {...pos} key={px} />)}
                 </div>
             </div>
         )}
@@ -57,7 +65,7 @@ export default function Work() {
     
     return <div className={'workContainer lightThemeSection section'} id='work'>
         <div className='sectionTitle'>Professional Summary</div>
-        <div className={'wcList sectionContainer'}>
+        <div className={'workList sectionContainer'}>
             {data.map((data, d) => <WorkCard key={d} {...data}  />)}
         </div>
     </div>

@@ -1,274 +1,191 @@
 @import '../../styles/utils.scss';
 
-.musicContainer{
-    .mcList{
-        .mclCard{
-            border: var(--theme-dark) solid 2px;
-            padding: 0;
-            
-            .mclcHeader{
-                .mclchPoster{
-                    max-width: 60%;
-                }
-    
-                .muclchText{
-                    padding: 0 50px;
-                    justify-content: center;
-                    
-                    h3{
-                        font-size: var(--heading-2-font-size);
-                        font-family: 'Fjalla One';
-                    }
-    
-                    .muclchtTagContainer{
-                        flex-wrap: wrap;
-                        margin-bottom: 20px;
-
-                        .muclchttcTag{
-                            border: 1px solid var(--theme-dark);
-                            border-radius: 1em;
-                            margin: 10px 10px;
-                            padding: 5px 15px;
-                        }
-                    }
-                }
-            }
-
-            .muclcExpand{
-                padding: 50px;
-                background-color: var(--theme-dark);
-                color: white;
-
-                h1{
-                    text-align: center;
-                    font-weight: var(--font-weight-normal);
-                }
-
-                .muclceMembers{
-                    flex-wrap: wrap;
-                    align-items: center;
-                    justify-content: center;
-                    align-items: stretch;
-                    min-height: 250px;
-                    margin-bottom: 50px;
-
-                    .muclcemMember{
-                        border: 1px solid var(--theme-light);
-                        padding: 5px 10px;
-                        margin: 10px;
-                        min-height: 220px;
-                        max-width: 140px;
-                        text-align: center;
-                        justify-content: space-around;
-
-                        h4{
-                            font-weight: var(--font-weight-normal);
-                            font-size: var(--font-size-l);
-                            margin: 10px 0 0;
-                        }
-
-                        .muclcemmArtForms{
-                            justify-self: flex-start;
-                            justify-content: flex-start;
-                        }
-
-                        .muclcemmLinks{
-                            padding: 0 10%;
-                            font-size: var(--font-size-xl);
-                            justify-content: space-around;
-                            justify-self: flex-end;
-                            a{
-                                color: inherit
-                            };
-                        }
-                        
-                    }
-                }
-
-                .muclceDivide{
-                    height: 1px;
-                    width: 100%;
-                    background-color: var(--theme-light);
-                }
-
-                .muclceProjects{
-                    width: 100%;
-                    align-items: center;
-
-                    .muclcepProject{
-                        width: 100%;
-
-                        .muclceppEmbed{
-                            width: 100%;
-
-                            iframe{
-                                width: 50%;
-                                min-height: 300px;
-                                margin: auto
-                            }
-                        }
-
-                        .muclceppTitle{
-                            margin-top: 10px;
-                            font-size: var(--heading-3-font-size);
-                            text-align: center;
-                        }
-
-                        .muclceppGenre{
-                            width: 100%;
-                            text-align: center;
-                            margin: 10px 0;
-                            margin-bottom: 50px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 
 .leftGrid{
     flex-direction: row;
+
+    .musicGroupIntro{ align-items: flex-end }
+
+    .musicGroupGenres{ justify-content: flex-end }
 }
 
-.rightGrid{
-    flex-direction: row-reverse;
-}
+// Flex position default values are fine
+.rightGrid{ flex-direction: row-reverse }
 
-@media (max-width: $medium-screen) {
-    .musicContainer{
-        .mcList{
-            .mclCard{
-                border: var(--theme-dark) solid 2px;
-                padding: 0;
-                
-                .mclcHeader{
-                    .mclchPoster{
-                        max-width: 100%;
-                    }
-        
-                    .muclchText{
-                        padding: 0 50px;
-                        text-align: center;
-                        
-                        h3{
-                            font-size: var(--heading-2-font-size);
-                            font-family: 'Fjalla One';
-                        }
-        
-                        .muclchtTagContainer{
-                            flex-wrap: wrap;
-                            justify-content: center;
+.musicCard{
+    margin: 20px auto;
+    
+    .musicCardHeader{
+        // don't try css grid here, did not work well with alternating sides
+        .musicGroupPic{ 
+            max-width: 60%;
+            object-fit: cover;
+        }
 
-                            .muclchttcTag{
-                                border: 1px solid var(--theme-dark);
-                                border-radius: 1em;
-                                margin: 6px 6px;
-                                padding: 5px 15px;
-                            }
-                        }
-    
-                    }
-                }
-    
-                .muclcExpand{
-                    padding: 50px;
-                    background-color: var(--theme-dark);
-                    color: white;
-    
-                    h1{
-                        text-align: center;
-                        font-weight: var(--font-weight-normal);
-                    }
-    
-                    .muclceMembers{
-                        flex-wrap: wrap;
-                        align-items: center;
-                        justify-content: center;
-                        align-items: stretch;
-                        min-height: 250px;
-                        margin-bottom: 50px;
-    
-                        .muclcemMember{
-                            border: 1px solid var(--theme-light);
-                            padding: 5px 10px;
-                            margin: 10px;
-                            min-height: 220px;
-                            max-width: 140px;
-                            text-align: center;
-                            justify-content: space-around;
-    
-                            h4{
-                                font-weight: var(--font-weight-normal);
-                                font-size: var(--font-size-l);
-                                margin: 10px 0 0;
-                            }
-    
-                            .muclcemmArtForms{
-                                justify-self: flex-start;
-                                justify-content: flex-start;
-                            }
-    
-                            .muclcemmLinks{
-                                padding: 0 10%;
-                                font-size: var(--font-size-xl);
-                                justify-content: space-around;
-                                justify-self: flex-end;
-                                a{
-                                    color: inherit
-                                };
-                            }
-                            
-                        }
-                    }
-    
-                    .muclceDivide{
-                        height: 1px;
-                        width: 100%;
-                        background-color: var(--theme-light);
-                    }
-    
-                    .muclceProjects{
-                        width: 100%;
-                        align-items: center;
-    
-                        .muclcepProject{
-                            width: 100%;
-    
-                            .muclceppEmbed{
-                                width: 100%;
-    
-                                iframe{
-                                    width: 50%;
-                                    min-height: 300px;
-                                    margin: auto
-                                }
-                            }
-    
-                            .muclceppTitle{
-                                margin-top: 10px;
-                                font-size: var(--heading-3-font-size);
-                                text-align: center;
-                            }
-    
-                            .muclceppGenre{
-                                width: 100%;
-                                text-align: center;
-                                margin: 10px 0;
-                                margin-bottom: 50px;
-                            }
-                        }
-                    }
+        .musicGroupIntro{
+            padding: 0 50px;
+            
+            .musicGroupTitle{
+                font-size: var(--heading-2-font-size);
+                font-family: 'Fjalla One';
+            }
+
+            .musicGroupGenres{
+                flex-wrap: wrap;
+                margin-bottom: 20px;
+
+                .mgGenreTag{
+                    border: 1px solid var(--theme-dark);
+                    border-radius: 1em;
+                    margin: 10px 10px;
+                    padding: 5px 15px;
                 }
             }
         }
     }
 
+    .musicCardExpand{
+        // Components acting weird without this
+        padding: 1px 20px;
+
+        background-color: var(--theme-dark);
+        color: white;
+
+        .mcExpTitle{
+            text-align: center;
+            font-weight: var(--font-weight-normal);
+        }
+        
+        .artists{
+            flex-wrap: wrap;
+            align-items: stretch;
+            margin-bottom: 30px;
+        }
+
+        .musicProjects{
+            align-items: center;
+        }
+    }
+}
+
+.artistCard{
+    border: 1px solid var(--theme-light);
+    margin: 5px;
+    min-height: 220px;
+    width: 140px;
+
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    text-align: center;
+
+    .artistName{
+        font-size: var(--font-size-s);
+        margin-top: 10px;
+        padding: 2px 5px;
+    }
+
+    .artForms{
+        font-weight: var(--font-weight-lighter);
+        font-size: var(--font-size-s);
+    }
+
+    .artistLinks{
+        padding: 0 10% 10px;
+        font-size: var(--font-size-xl);
+        justify-content: space-around;
+        align-items: flex-end;
+    }
+}
+
+.musicProjectCard{
+    .musicProjectEmbed{
+        iframe{
+            width: 50%;
+            min-height: 300px;
+            margin: auto
+        }
+    }
+
+    .musicProjectTitle{
+        margin-top: 10px;
+        font-size: var(--heading-3-font-size);
+        text-align: center;
+    }
+
+    .musicProjectGenre{
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: $large-tab){
     .leftGrid{
         flex-direction: column;
+
+        .musicGroupIntro{ align-items: flex-start }
+    
+        .musicGroupGenres{ justify-content: flex-start }
     }
     
-    .rightGrid{
-        flex-direction: column;
-    }   
+    // Flex position default values are fine
+    .rightGrid{ flex-direction: column }
+
+    .musicCard{
+        .musicCardHeader{
+            .musicGroupPic{ 
+                max-width: 100%;
+            }
+    
+            .musicGroupIntro{
+                align-items: center;
+                padding: 0 20px;
+
+                .musicGroupGenres{
+                    justify-content: center;
+                }
+            }
+        }
+    
+        .musicCardExpand{
+            .artists{ margin-bottom: 20px }
+        }
+    }
+
+    .musicProjectCard{
+        .musicProjectEmbed{    
+            iframe{
+                width: 100%;
+            }
+        }
+    
+        .musicProjectTitle{
+            margin-top: 10px;
+            font-size: var(--heading-3-font-size);
+            text-align: center;
+        }
+    
+        .musicProjectGenre{
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+@media (max-width: $large-phone) {
+    .artistCard{
+        min-height: 200px;
+        width: 120px;
+    
+        .artistName{
+            font-size: var(--font-size-m);
+        }
+    }
+
+    .musicProjectCard{
+        .musicProjectEmbed{ iframe{ min-height: 200px } }
+    }
 }

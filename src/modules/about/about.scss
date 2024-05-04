@@ -1,103 +1,98 @@
 @import '../../styles/utils.scss';
 
 .aboutContainer {
-    .acBanner {
-        width: inherit;
-        display: block;
-        object-fit: cover;
-        height: calc(100vh - 3 * var(--header-height));
-    }
-
-    .acbText {
-        height: calc(2 * var(--header-height));
+    .greeting {
+        height: calc(2 * $header-height);
         background-color: var(--theme-medium-light);
         justify-content: center;
+        color: var(--theme-dark);
 
         h1 {
             font-family: 'Fjalla One';
-            text-align: center;
             font-size: var(--heading-2-font-size);
             font-weight: var(--font-weight-normal);
+            text-align: center;
             text-transform: uppercase;
             margin: 0;
         }
 
     }
+}
 
-    .acIntro {
-        h3 {
-            font-weight: var(--font-weight-normal);
-            font-size: var(--heading-2-font-size);
-            font-family: 'Source Sans Pro';
+.banner {
+    width: inherit;
+    display: block;
+    object-fit: cover;
+    height: calc(100vh - 2 * $header-height);
+}
+
+.introSubTitle {
+    font-weight: var(--font-weight-normal);
+    font-size: var(--heading-2-font-size);
+    font-family: 'Source Sans Pro';
+    text-align: center;
+}
+
+.aboutContent {
+    .intro{
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+
+        .introText{
+            p {
+                padding-right: 40px;
+                text-align: justify;
+                font-size: var(--font-size-m)
+            }
         }
 
-        .aciContainer {
-            margin-top: 40px;
+        .introPicture{
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
 
-            .aciText {
-                padding: 0 5%;
+@media (max-width: $large-tab) {
+    .aboutContent{
+        .intro{
+            display: flex;
+            flex-direction: column-reverse;
 
+            .introText{
                 p {
-                    font-size: var(--font-size-m)
+                    padding-right: 0;
                 }
             }
 
-            .aciProfilePicture {
+            .introPicture{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
                 img {
-                    width: var(--profile-picture-width);
-                    object-fit: cover;
+                    max-width: 60%;
                 }
             }
         }
     }
 }
 
-@media(max-width: 1080px) {
-    .aboutContainer {
-        .acIntro {
-            .aciContainer {
-                flex-direction: column-reverse;
+@media(max-width: $small-tab) {}
 
-                .aciText {
-                    padding: 0;
-                    p {
-                        font-size: var(--font-size-s)
-                    }
-                }
-
-                .aciProfilePicture {
-
-                    img {
-                        width: 80%;
-                        margin: auto;
-                    }
-                }
-            }
-
-            .aciBarContainer {
-                display: none
-            }
-        }
-    }
-}
-
-
-@media (max-width: 600px) {
-    .aboutContainer {
-        .acIntro {
-            .aciContainer {
-                .aciText {
-                    p {
-                        font-size: var(--font-size-m);
-                    }
-                }
-
-                .aciProfilePicture {
-                    img {
-                        width: 100%;
-                    }
+@media (max-width: $large-phone) {
+    .aboutContent{
+        .intro{
+            .introPicture{
+                img {
+                    max-width: 100%;
                 }
             }
         }
     }
+
+    .introCharContainer{ display: none }
 }

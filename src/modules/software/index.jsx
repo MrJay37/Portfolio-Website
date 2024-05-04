@@ -8,40 +8,49 @@ import { CardExpand } from '../../components'
 function SoftwareCard({ title, startDate, endDate, tech_stack, picture, description, members }){
     const [open, setOpen] = useState(false)
     
-    return <div className={'swclCard cardBorder'}>
-        <div className={'swclcMain'}>
-            <div className={'swclcmHeader'}>
-                <h3>{title}</h3>
-                <span>
+    return <div className={'softwareCard cardBorderLight'}>
+        <div className={'softwareCardFace'}>
+            <div className={'softCardHeader'}>
+                <h3 className='softProjTitle'>{title}</h3>
+                <span className='softProjDates'>
                     {dtFmt(startDate)} {endDate ? 'to ' + dtFmt(endDate): '(Ongoing)'}
                 </span>
             </div>
-            <div className={'swclcmTags flex'}>
-                {tech_stack.slice(0, 6).map((ts, i) => <span key={i}>{ts}</span>)}
+            <div className={'softwareCardTags flex'}>
+                {tech_stack.slice(0, 6).map((ts, i) => <span className='softProjTech' key={i}>{ts}</span>)}
             </div>
         </div>
-        <div className={'swclcExpand fullWidth flex-column'}>
+        <div className={'softwareCardExpand fullWidth flex-column'}>
             <CardExpand open={open} onClick={() => setOpen(!open)}/>
             {open && <>
-                <div className={'swclceDivider'}></div>
-                <div className={'swclceBody'}>
-                    <img className='fullWidth swclcebImage' src={picture} alt={`project`} />
-                    <div className={"swclcebContent"}>
-                        <div className={"swclcebcSection"}>
-                            <h4 className={"swclcebcHeading"}>Project</h4>
+                <div className={'softExpDivider fullWidth'}></div>
+                <div className={'softExpBody'}>
+                    <img className='fullWidth softwarePic' src={picture} alt={`project`} />
+                    <div className={"softwareContent"}>
+                        <div className={"softwareDesc"}>
+                            <h4 className={"softContHeading"}>Project</h4>
                             <p>{description}</p>
                         </div>
-                        <div>
-                            <h4 className={"swclcebcHeading"}>Members</h4>
-                            <div className='swclcebchMembers'>
-                                {members.filter(m => m).map((member, m) => {
-                                    const linkedIn = member.socialMedia.filter(sm => sm.app === 'LinkedIn')[0]['url']
+                        <div className='softwareMembers'>
+                            <h4 className={"softContHeading"}>Members</h4>
+                            <div className='memberNames'>
+                                {members.map(({socialMedia, name}, m) => {
+                                    const linkedIn = socialMedia.filter(
+                                        sm => sm.app === 'LinkedIn'
+                                    )[0]
 
-                                    return <a href={linkedIn} target="_blank" rel="noreferrer" key={m}>
-                                        <div className={"swclcebchMember"}>{member.name}</div>
+                                    return <a 
+                                        href={linkedIn ? linkedIn['url'] : null} 
+                                        target="_blank" 
+                                        rel="noreferrer" 
+                                        key={m}
+                                        className={"softwareMember removeTextFormat"}
+                                    >
+                                        {name}
                                     </a>
                                 })}
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -88,9 +97,9 @@ export default function Software({ members }) {
         }    
     }, [members, swData]);
 
-    return <div className={'swContainer section'} id='software'>
+    return <div className={'softwareContainer section'} id='software'>
         <div className='sectionTitle'>Software</div>
-        <div className={'swcList sectionContainer'}>
+        <div className={'softwareList sectionContainer'}>
             {(swData || []).map((project, i) => <SoftwareCard key={i} {...project}/>)}
         </div>
     </div>

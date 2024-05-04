@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './contact.scss'
 import {AiFillGithub, AiFillLinkedin, AiFillYoutube, AiFillInstagram} from 'react-icons/ai'
+import { EMAIL_REGEX } from '../../lib'
 
 function Notification({ showNotification, message, error=false}) {
     const classNames = ['notification'] 
@@ -14,29 +15,35 @@ function Notification({ showNotification, message, error=false}) {
 }
 
 function DocItem({ text, url, docButtonText }) {
-    return <div className={'ccddbdItem'}>
+    return <div className={'documentItem flex-column-center-align'}>
         <div className={'ccddbdiText'}>{text}</div>
-        <div className={'ccddbdiBtn flex'}>
-            <a target="_blank" rel="noreferrer" href={url}>{docButtonText}</a>
+        <a className={'ccddbdiBtn flex'} target="_blank" rel="noreferrer" href={url}>
+            <span>{docButtonText}</span>
+        </a>
+    </div>
+}
+
+function Documents(){
+    return <div className={'documents'}>
+        <div className={'docsInnerBox flex-column-center-align'}>
+            <div className={'docsContainer fullWidth flex-column'}>
+                <DocItem 
+                    text={'Download my resume here!'} 
+                    url="https://drive.google.com/file/d/1Qmynu9CUW_dn51qo57UTkNlVMEoTerkp/view?usp=share_link"
+                    docButtonText={'Resume'}
+                />
+                <DocItem 
+                    text={'Download my favorite meme here!'} 
+                    url="https://drive.google.com/file/d/1mKdCEgv2kd6w902U6iIdmFRmRnhWiyFh/view?usp=sharing"
+                    docButtonText={'Meme'}
+                />
+            </div>
         </div>
     </div>
 }
 
-const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-export default function Contact(){
-    // Form
+function ContactForm() {
     const [values, setValues] = useState({})
-
-    // Validation
-    const [error, setError] = useState({})
-
-    // Notification
-    const [showNotification, setShowNotification] = useState(false)
-    const [notificationMessage, setNotificationMessage] = useState(null)
-
-    // Loading
-    const [waiting, setWaiting] = useState(false)
 
     const sendMessage = async (evt) => {
         setShowNotification(false)
@@ -84,80 +91,82 @@ export default function Contact(){
         }, 5000);
     }
 
+    // Validation
+    const [error, setError] = useState({})
+
+    // Notification
+    const [showNotification, setShowNotification] = useState(false)
+    const [notificationMessage, setNotificationMessage] = useState(null)
+
+    // Loading
+    const [waiting, setWaiting] = useState(false)
+
+    return <>
+        <Notification message={notificationMessage} error={error} showNotification={showNotification}/>
+        <form className={'contactForm'} onSubmit={sendMessage}>
+        <div className={'formItem flex-column-center-align'}>
+            <label 
+                htmlFor={"contactFormName"} 
+                className={'cccfiLabel'}>
+                Name
+            </label>
+            <input 
+                id={"contactFormName"} 
+                className={'cccfiField'} 
+                placeholder="What can I call you?" 
+                onChange={({ target: { value }}) => setValues({...values, name: value})} 
+                value={values.name || ''} 
+            />
+            {error.name ? <span>{error.name}</span>: <></>}
+        </div>
+        <div className={'formItem flex-column-center-align'}>
+            <label 
+                htmlFor={'contactFormName'} 
+                className={'cccfiLabel'}
+            >
+                Email
+            </label>
+            <input 
+                id="contactFormName" 
+                className={'cccfiField'} 
+                placeholder="I'll reply back on this" 
+                onChange={({ target: { value }}) => setValues({...values, email: value})} 
+                value={values.email || ''} 
+            />
+            {error.email ? <span>{error.email}</span>: <></>}
+        </div>
+        <div className={'formItem flex-column-center-align'}>
+            <label 
+                htmlFor={'contactFormName'} 
+                className={'cccfiLabel'}
+            >
+                Message
+            </label>
+            <textarea 
+                id="contactFormName" 
+                className={'cccfiTextarea'} 
+                onChange={({ target: { value }}) => setValues({...values, message: value})} 
+                value={values.message || ''} 
+            />
+            {error.message ? <span>{error.message}</span>: <></>}
+        </div>
+        {!waiting ? <button className={'formSubmitButton'} type='submit'>
+            Send
+        </button> : <></>}
+    </form>
+    </>
+}
+
+export default function Contact(){
     return <div className={'contactContainer section'} id='contact'>
         <div className="sectionTitle">Contact</div>
-        <Notification message={notificationMessage} error={error} showNotification={showNotification}/>
+        
         <div className={'contactGreeting'}>
             Thank you for visiting my website! Leave me a message if you have any questions!
         </div>
         <div className={'contactContent sectionContainer'}>
-            <form className={'ccContactForm'} onSubmit={sendMessage}>
-                <div className={'cccfItem'}>
-                    <label 
-                        htmlFor={"contactFormName"} 
-                        className={'cccfiLabel'}>
-                        Name
-                    </label>
-                    <input 
-                        id={"contactFormName"} 
-                        className={'cccfiField'} 
-                        placeholder="What can I call you?" 
-                        onChange={({ target: { value }}) => setValues({...values, name: value})} 
-                        value={values.name || ''} 
-                    />
-                    {error.name ? <span>{error.name}</span>: <></>}
-                </div>
-                <div className={'cccfItem'}>
-                    <label 
-                        htmlFor={'contactFormName'} 
-                        className={'cccfiLabel'}
-                    >
-                        Email
-                    </label>
-                    <input 
-                        id="contactFormName" 
-                        className={'cccfiField'} 
-                        placeholder="I'll reply back on this" 
-                        onChange={({ target: { value }}) => setValues({...values, email: value})} 
-                        value={values.email || ''} 
-                    />
-                    {error.email ? <span>{error.email}</span>: <></>}
-                </div>
-                <div className={'cccfItem'}>
-                    <label 
-                        htmlFor={'contactFormName'} 
-                        className={'cccfiLabel'}
-                    >
-                        Message
-                    </label>
-                    <textarea 
-                        id="contactFormName" 
-                        className={'cccfiTextarea'} 
-                        onChange={({ target: { value }}) => setValues({...values, message: value})} 
-                        value={values.message || ''} 
-                    />
-                    {error.message ? <span>{error.message}</span>: <></>}
-                </div>
-                {!waiting ? <button className={'cccfSubmitBtn'} type='submit'>
-                    Send
-                </button> : <></>}
-            </form>
-            <div className={'ccDocuments'}>
-                <div className={'ccdDocBox'}>
-                    <div className={'ccddbDocs'}>
-                        <DocItem 
-                            text={'Download my resume here!'} 
-                            url="https://drive.google.com/file/d/1Qmynu9CUW_dn51qo57UTkNlVMEoTerkp/view?usp=share_link"
-                            docButtonText={'Resume'}
-                        />
-                        <DocItem 
-                            text={'Download my favorite meme here!'} 
-                            url="https://drive.google.com/file/d/1mKdCEgv2kd6w902U6iIdmFRmRnhWiyFh/view?usp=sharing"
-                            docButtonText={'Meme'}
-                        />
-                    </div>
-                </div>
-            </div>
+            <ContactForm />
+            <Documents />
         </div>
         <div className={'contactFooter flex alignCenter'}>
             <div className={'cfTrademark'}>

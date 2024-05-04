@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import './header.scss'
 import HambugerButton from '../hamburgerIcon'
+
+import './header.scss'
 
 const menu = [
 	{
@@ -31,20 +32,18 @@ const menu = [
 ]
 
 function NavigationGroup() {
-	return <div className={'hccNavMenu flex'}>
+	return <div className={'headerNavMenu flex'}>
 		{menu.map(({ to, displayText, id }) => (
-			<a key={id} href={to} className="hccnNavMenuOption headerLink">
-				{displayText}
-			</a>
+			<a key={id} href={to} className="navMenOpt removeTextFormat">{displayText}</a>
 		))}
 	</div>
 }
 
 function DrawerNavigation({ onClick }) {
-	return <div className='hccNavDrawer' onClick={onClick} >
-		<div className={'hccndOptions fullWidth flex-column'}>
+	return <div className='headerNavDrawer' onClick={onClick} >
+		<div className={'navDrawerMenu fullWidth flexColumn'}>
 			{menu.map(({ to, displayText, id }) => (
-				<a key={id} href={to} className="hccnNavMenuOption headerLink" >
+				<a key={id} href={to} className="navDrawerMenOpt removeTextFormat" >
 					{displayText}
 				</a>
 			))}
@@ -58,10 +57,10 @@ export default function Header() {
 	const closeDrawer = () => showDrawer(!drawer)
 
 	return <div className={'headerContainer flex alignCenter fullWidth'}>
-		<div className={'hcContent flex alignCenter fullWidth'}>
-			<a className={"hccAvatar flex headerLink"} href='/'>Sanket Jain</a>
+		<div className={'headerContent flex alignCenter fullWidth'}>
+			<a className={"headerAvatar flex removeTextFormat"} href='/'>Sanket Jain</a>
 			<NavigationGroup />
-			<span className={'hccDrawerButton'}>
+			<span className={'headerDrawerBtn'}>
 				<HambugerButton clicked={drawer} onClick={closeDrawer} />
 			</span>
 			{drawer ? <DrawerNavigation onClick={closeDrawer} /> : <></>}

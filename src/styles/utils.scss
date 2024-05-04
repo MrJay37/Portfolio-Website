@@ -1,51 +1,40 @@
-// VARIABLE VALUES DO NOT CHANGE
-$medium-screen: 1024px;
-$small-screen: 600px;
+@import './constants.scss';
 
 
-.success_background {
-    background-color: green
+.success_background { background-color: green }
+
+.error_background { background-color: red}
+
+.removeTextFormat {
+    color: inherit;
+    text-decoration: none;
 }
 
-.error_background {
-    background-color: red
-}
+.fullWidth { width: 100% };
+
+.cursorPointer { cursor: pointer; }
 
 // display: flex styling classNames
-.flex {
-    display: flex
-}
+.flex { display: flex }
 
-.alignCenter {
-    align-items: center
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column
-}
-
-.flex-column-center-align {
+.flexColumn{
     display: flex;
     flex-direction: column;
-    margin: auto;
-    align-items: center;
 }
 
-.section {
-    width: 100%;
-    margin: var(--header-height) auto
-}
+.justifyCenter{ justify-content: center }
 
-.sectionContainer {
-    width: 80%;
-    max-width: var(--max-container-width);
-    margin: auto;
-    padding: 20px 0;
+.alignCenter { align-items: center }
+
+.section { width: 100% }
+
+.lightThemeSection {
+    background-color: var(--theme-light);
+    color: var(--theme-dark);
 }
 
 .sectionTitle {
-    padding: var(--header-height) 0 0;
+    padding-top: calc($header-height + 10px);
     width: 80%;
     margin: auto;
     text-align: center;
@@ -54,11 +43,25 @@ $small-screen: 600px;
     font-weight: var(--font-weight-normal);
 }
 
-.lightThemeSection {
-    background-color: var(--theme-light);
-    color: var(--font-color-black);
+.sectionContainer {
+    max-width: 960px;
+    width: 80%;
+    margin: auto;
+    padding: 20px 0;
 }
 
-.cursorPointer{
+.cardBorder {
+    border: 1px solid var(--theme-dark);
+    overflow: hidden;
+}
+
+.cardBorderLight {
+    border: 1px solid var(--theme-light);
+    overflow: hidden;
+}
+
+.switch {
+    text-align: center;
+    width: 100%;
     cursor: pointer;
 }

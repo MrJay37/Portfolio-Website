@@ -10,57 +10,65 @@ const appIcons = {
     'Instagram': <AiFillInstagram />
 }
 
+function ArtistCard({ name, artForms, socialMedia }) {
+    return <div className={'artistCard'}>
+        <span className='artistName'>{name}</span>
+        <div className={'artForms flexColumn alignCenter justifyCenter'}>
+            {artForms.map((af, a) => <span key={a}>{af}</span>)}
+        </div>
+        <div className={'artistLinks flex'}>
+            {socialMedia
+                .filter(sm => ['YouTube', 'Instagram'].includes(sm.app.trim()))
+                .map((sm, s) => <a 
+                    key={s} 
+                    rel='noreferrer' 
+                    href={sm.url} 
+                    target="_blank"
+                    className='removeTextFormat'
+                >
+                    {appIcons[sm.app.trim()]}
+                </a>)}
+        </div>
+    </div>
+}
+
+const ProjectCard = ({ embed, title, genres}) => {
+    return <div className={'musicProjectCard fullWidth'}>
+        <div className={'musicProjectEmbed flex fullWidth'} dangerouslySetInnerHTML={{__html: embed}}></div>
+        <div className={'musicProjectTitle'}>{title}</div>
+        <div className={'musicProjectGenre'}>{genres.join(' | ')}</div>
+    </div>
+}
+
 function MusicCard({ count, img, title, genres, members, projects}){
     const [open, setOpen] = useState(false)
     const card_dir = count % 2 === 1 ? 'right' : 'left'
 
-    return <div className={'mclCard cardBorder'}>
-        <div className={'mclcHeader flex ' + card_dir + 'Grid'}>
-            <img className={'mclchPoster'} src={img} alt='groupPic'/>
-            <div className={'muclchText flex-column'}>
-                <h3>{title}</h3>
-                <div className={'muclchtTagContainer flex normal-text card' }>
+    return <div className={'cardBorder musicCard'}>
+        <div className={'musicCardHeader flex ' + card_dir + 'Grid'}>
+            <img className={'musicGroupPic'} src={img} alt='groupPic'/>
+            <div className={'musicGroupIntro flexColumn'}>
+                <h3 className='musicGroupTitle'>{title}</h3>
+                <div className={'musicGroupGenres flex card' }>
                     {genres && genres.slice(0, 4).map((genre, g) => (
-                        <div className={'muclchttcTag'} key={g}>{genre}</div>
+                        <div className={'mgGenreTag'} key={g}>{genre}</div>
                     ))}
                 </div>
                 <CardExpand open={open} onClick={() => setOpen(!open)} style={{margin: "20px 0"}}/>
             </div>
         </div>
-        {
-            open && <div className={'muclcExpand'}>
-                <h1>Members</h1>
-                <div className={'muclceMembers flex'}>
-                    {members.map((member, m) => <div className={'muclcemMember flex-column'} key={m}>
-                        <h4>
-                            {member.name}
-                        </h4>
-                        <div className={'muclcemmArtForms flex-column'}>
-                            {member.artForms.map((af, a) => <span key={a}>{af}</span>)}
-                        </div>
-                        <div className={'muclcemmLinks flex'}>
-                            {member.socialMedia
-                                .filter(sm => ['YouTube', 'Instagram'].includes(sm.app.trim()))
-                                .map((sm, s) => <a key={s} rel='noreferrer' href={sm.url} target="_blank">{appIcons[sm.app.trim()]}</a>)}
-                        </div>
-                    </div>)}
-                </div>
-                <div className={'muclceDivide'} />
-                <h1>Projects</h1>
-                <div className={'muclceProjects flex-column'}>
-                    {projects.map((project, p) => {
-                        return <div className={'muclcepProject'} key={p}>
-                            <div className={'muclceppEmbed flex'} dangerouslySetInnerHTML={{__html: project.embed}}></div>
-                            <div className={'muclceppTitle'}>{project.title}</div>
-                            <div className={'muclceppGenre'}>{project.genres.join(' | ')}</div>
-                        </div>
-                    })}
-                </div>
+        {open && <div className={'musicCardExpand'}>
+            <h1 className='mcExpTitle'>Members</h1>
+            <div className={'artists fullWidth flex justifyCenter'}>
+                {members.map((member, m) => <ArtistCard key={m} {...member} />)}
             </div>
-        }
+            <h1 className='mcExpTitle'>Projects</h1>
+            <div className={'musicProjects flexColumn fullWidth'}>
+                {projects.map((project, p) => <ProjectCard key={p} {...project} />)}
+            </div>
+        </div>}
     </div>
 }
-
 
 export default function Music({ members }) {
     const [musicData, setMusicData] = useState(null);
@@ -89,7 +97,7 @@ export default function Music({ members }) {
 
     return <div className={'musicContainer section lightThemeSection'} id='music'>
         <div className='sectionTitle'>Music</div>
-        <div className={'mcList sectionContainer'}>
+        <div className={'musicList sectionContainer'}>
             {(musicData || []).map((props, i) => <MusicCard {...props} count={i} key={i}/>)}
         </div>
     </div>

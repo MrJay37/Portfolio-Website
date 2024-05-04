@@ -3,7 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Header } from './components';
-import { About, Contact, Education, Music, Software, Work } from './modules';
+import { 
+    About,
+    // Contact, 
+    Education, 
+    Music,
+    Software,
+    Work
+} from './modules';
 
 import { sanityClient } from './lib/sanityClient';
 

@@ -1,87 +1,79 @@
 @import '../../styles/utils.scss';
 
+.softwareCard{
+    padding: 20px;
+    margin: 20px auto;
+       
+    .softwareCardFace{
+        .softCardHeader{
+            display: grid;
+            grid-template-columns: 2fr 1fr;
 
-.swContainer{
-    .swcList{
-        .swclCard{
-            border: var(--theme-light) solid 2px;
-            font-family: 'Source Sans Pro';
+            .softProjTitle{
+                font-size: var(--heading-3-font-size);
+                font-weight: var(--font-weight-normal);
+                margin: 0 0 20px 0;
+            }
+
+            .softProjDates{
+                text-align: right;
+                font-size: var(--font-size-m);
+            }
+        }
+        
+        .softwareCardTags{
+            margin-top: 10px;
+            flex-wrap: wrap;
             
-            .swclcMain{
-                .swclcmHeader{
-                    display: grid;
-                    grid-template-columns: 4fr 1fr;
-    
-                    h3{
-                        font-size: var(--heading-3-font-size);
-                        font-weight: var(--font-weight-normal);
-                        margin: 0;
-                    }
-    
-                    span{
-                        text-align: right;
-                        font-size: var(--font-size-m);
-                    }
+            .softProjTech{
+                margin-right: 10px;
+                margin-bottom: 10px;
+                padding: 5px 10px;
+
+                border: 1px solid var(--theme-medium-light);                
+                border-radius: 1rem;
+
+                font-size: var(--font-size-s);
+            }
+        }
+    }
+
+    .softwareCardExpand{
+        margin-top: 20px;
+
+        .softExpDivider{
+            margin-top: 10px;
+            height: 1px;
+            background-color: var(--theme-light);
+        }
+
+        .softExpBody{
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 3fr 5fr;
+
+            .softwareContent{
+                padding-left: 20px;
+                
+                .softContHeading{
+                    font-size: var(--font-size-m);
+                    font-weight: var(--font-weight-normal);
+                    margin: 0;
+                    padding: 0 0 5px 0;
+                }
+
+                .softwareDesc{
+                    font-weight: var(--font-weight-light);
+                    text-align: justify;
                 }
                 
-                .swclcmTags{
-                    margin: 10px 0 0;
-                    flex-wrap: wrap;
-                    
-                    span{
-                        margin-right: 10px;
-                        margin-bottom: 10px;
-                        border: 1px solid var(--theme-medium-light);
-                        padding: 5px 10px;
-                        border-radius: 1rem;
-                        font-size: var(--font-size-s);
-                    }
-                }
-            }
+                .softwareMembers{
+                    .softwareMember{
+                        display: inline;
+                        margin-right: 5px;
+                        font-weight: var(--font-weight-lighter);
 
-            .swclcExpand{
-                margin-top: 20px;
-
-                .swclceDivider{
-                    margin-top: 10px;
-                    height: 1px;
-                    width: 100%;
-                    background-color: var(--theme-light);
-                }
-
-                .swclceBody{
-                    margin-top: 20px;
-                    display: grid;
-                    grid-template-columns: 3fr 5fr;
-
-                    .swclcebContent{
-                        padding: 0 20px;
-
-                        .swclcebcSection{
-                            font-weight: var(--font-weight-light);
-                        }
-
-                        .swclcebcHeading{
-                            font-size: var(--font-size-m);
-                            font-weight: var(--font-weight-normal);
-                            margin: 0;
-                            padding: 0 0 5px 0;
-                        }
-
-                        a{
-                            text-decoration: none;
-                            color:inherit;
-                        }
-                        
-                        .swclcebchMembers{
-                            .swclcebchMember{
-                                display: inline;
-                                margin: 0 10px 0 0;
-                                font-weight: var(--font-weight-lighter);
-    
-                                &:hover { text-decoration: underline }
-                            }
-                        }
+                        &:hover { text-decoration: underline }
                     }
                 }
             }
@@ -89,113 +81,32 @@
     }
 }
 
+@media (max-width: $small-tab) {
+    .softwareCard{           
+        .softwareCardExpand{
+            .softExpBody{
+                display: flex;
+                flex-direction: column;
+    
+                .softwareContent{
+                    padding-left: 0;
+                    padding-top: 20px;
 
-@media (max-width: $medium-screen) {
-    .swContainer{
-        .swcList{
-            .swclCard{
-                .swclcMain{
-                    .swclcmHeader{
-                        margin-bottom: 40px;
-
-                        h3{
-                            font-size: var(--heading-2-font-size);
-                        }
-        
-                        span{
-                            font-size: var(--font-size-m);
-                        }
+                    .softContHeading{
+                        padding: 0 0 5px 0;
+                        font-size: var(--font-size-l);
+                        text-align: center;
                     }
-                    
-                    .swclcmTags{
-                        span{
-                            font-size: var(--font-size-m);
-                        }
-                    }
-                }
-    
-                .swclcExpand{
-                    .swclceBody{
-                        grid-template-columns: 1fr;
-
-                        .swclcebImage{
-                            max-width: 60vw;
-                            margin: 0 auto 20px;
-                        }
-    
-                        .swclcebContent{
-                            padding: 0;
-    
-                            .swclcebcSection{
-                                font-weight: var(--font-weight-light);
-
-                                p{
-                                    font-size: var(--font-size-m);
-                                    text-align: justify;
-                                }
-                            }
-
-                            .swclcebcHeading{
-                                font-size: var(--font-size-l);
+                        
+                    .softwareMembers{
+                        .memberNames{
+                            .softwareMember{
+                                display: block;
+                                margin-right: 0;
+                                margin-bottom: 4px;
                                 text-align: center;
                             }
-
-                            .swclcebchMembers{
-                                .swclcebchMember{
-                                    display: block;
-                                    text-align: center;
-                                    margin: 5px auto;
-                                    font-size: var(--font-size-m);
-                                }
-                            }
                         }
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-@media (max-width: $small-screen) {
-    .swContainer{
-        .swcList{
-            .swclCard{
-                .swclcMain{
-                    .swclcmHeader{
-                        display: block;
-                        margin-bottom: 20px;
-
-                        h3{
-                            font-size: var(--font-size-l);
-                        }
-        
-                        span{
-                            font-size: var(--font-size-m);
-                        }
-                    }
-                    
-                    .swclcmTags{
-                        span{
-                            font-size: var(--font-size-s);
-                        }
-                    }
-                }
-    
-                .swclcExpand{
-                    margin-top: 20px;
-                    width: 100%;
-                    align-items: center;
-    
-                    .swclceDivider{
-                        margin-top: 10px;
-                        height: 1px;
-                        width: 100%;
-                        background-color: var(--theme-light);
-                    }
-    
-                    .swclceBody{
-                        .swclcebImage{ max-width: 100% }
                     }
                 }
             }

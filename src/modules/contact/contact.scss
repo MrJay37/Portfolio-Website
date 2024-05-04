@@ -14,145 +14,8 @@
     .contactContent{
         width: 100%;
         max-width: 1128px;
-        margin: auto;
-        display: flex;
-
-        .ccContactForm{
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            max-width: 50%;
-    
-            .cccfItem{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                margin: 20px 0;
-    
-                .cccfiLabel{
-                    width: 100%;
-                    font-size: var(--font-size-xl);
-                    font-weight: var(--font-weight-light);
-                    font-family: 'Source Sans Pro';
-                    margin: 0 0 20px 0;
-                }
-    
-                .cccfiField{
-                    width: 100%;
-                    align-self: flex-start;
-                    width: var(--contact-form-input-width);
-                    height: var(--contact-form-input-height);
-                    padding: 0 15px;
-                    font-size: var(--font-size-s);
-                    font-family: 'Source Sans Pro', Courier, monospace;
-
-                    &:focus{
-                        outline: none;
-                    }
-                }
-    
-                .cccfiTextarea{
-                    width: var(--contact-form-input-width);
-                    align-self: flex-start;
-                    height: var(--contact-form-textarea-height);
-                    font-size: var(--font-size-s);
-                    padding: 15px 15px;
-                    font-family: 'Source Sans Pro', Courier, monospace;
-
-                    &:focus{
-                        outline: none;
-                    }
-                }
-            }
-    
-            .cccfSubmitBtn{
-                width: 25%;
-                // margin: 0 auto;
-                height: 40px;
-                font-size: var(--font-size-l);
-                background-color: var(--theme-medium-dark);
-                color: inherit;
-                font-family: 'Source Sans Pro';
-                font-weight: var(--font-weight-light);
-                outline: none;
-                border: none;
-
-                &:hover{
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .ccDocuments{
-            margin-top: 10vh;
-            background-color: var(--theme-medium-light);
-            height: auto;
-            width: 50%;
-            position: relative;
-
-            .ccdDocBox{
-                color: var(--font-color-dark);
-                position: absolute;                
-                margin: 2.5%;
-                border: 1px dashed var(--theme-dark);
-                position: absolute;
-                background-color: var(--theme-light);
-                height: 95%;
-                width: 95%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                .ccddbDocs{
-                    width: 100%;
-                    margin: auto;
-                    display: flex;
-                    flex-direction: column;
-                    align-content: space-around;
-                    height: 100%;
-
-                    .ccddbdItem{
-                        margin: auto;
-                        max-width: 80%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-
-                        .ccddbdiText{
-                            text-align: center;
-                            font-size: var(--font-size-l);
-                            padding: 10px;
-                            font-family: 'Source Sans Pro';
-                        }
-
-                        .ccddbdiBtn{
-                            margin: auto;
-                            background-color: transparent;
-                            border: 1px dashed var(--theme-dark);
-                            width: 50%;
-                            height: 45px;
-                            justify-content: center;
-                            align-items: center;
-                            font-size: var(--font-size-m);
-                            
-                            
-                            a{
-                                font-family: 'Source Sans Pro';
-                                text-decoration: none;
-                                color: inherit;
-                            }
-
-                            &:hover{
-                                cursor: pointer;
-                            }
-                        }
-                    }
-                    
-                }
-            }
-        }
+        display: grid;
+        grid-template-columns: 4fr 3fr;
     }
 
     .contactFooter{
@@ -179,103 +42,206 @@
     }
 }
 
-@media (max-width: $medium-screen) {
-    .container{
-        .greeting{ font-size: var(--heading-3-font-size) }
-    
-        .contactContainer{
-            display: flex;
-            flex-direction: column;
+.contactForm{
+    width: 100%;
+
+    .formItem{
+        width: 100%;
+        margin: 20px 0;
+
+        .cccfiLabel{
             width: 100%;
-            
-            .contactForm{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin: auto;
-                width: 100%;
-                max-width: 100%;
-        
-                .contactFormItem{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    width: 100%;
-                    margin: 10px auto;
-        
-                    .contactFormItemLabel{
-                        width: 100%;
-                        text-align: center;
-                        font-size: var(--font-size-xl);
-                        font-weight: var(--font-weight-light);
-                        margin: 0 auto 10px;
-                    }
-        
-                    .contactFormItemField{
-                        width: 100%;
-                        // align-self: flex-start;
-                        width: var(--contact-form-input-width);
-                        height: var(--contact-form-input-height);
-                        font-size: var(--font-size-l);
-                        margin: auto;
-                        text-align: center;
-                    }
-        
-                    .contactFormItemTextarea{
-                        width: var(--contact-form-input-width);
-                        height: var(--contact-form-textarea-height);
-                        margin: auto;
-                        font-size: var(--font-size-l);
-                        padding: 15px 15px;
-                        font-family: 'Source Sans Pro', Courier, monospace;
-    
-                        &:focus{ outline: none }
-                    }
-                }
-        
-                .contactFormSubmitButton{
-                    width: 25%;
-                    height: 40px;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-light);
+            font-family: 'Source Sans Pro';
+            margin: 0 0 20px 0;
+        }
+
+        .cccfiField{
+            width: 100%;
+            align-self: flex-start;
+            width: 80%;
+            height: 40px;
+            padding: 0 15px;
+            font-size: var(--font-size-s);
+
+            &:focus{
+                outline: none;
+            }
+        }
+
+        .cccfiTextarea{
+            width: 80%;
+            align-self: flex-start;
+            height: 160px;
+            font-size: var(--font-size-s);
+            padding: 15px 15px;
+            font-family: 'Source Sans Pro', Courier, monospace;
+
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+    .formSubmitButton{
+        width: 25%;
+        // margin: 0 auto;
+        height: 40px;
+        font-size: var(--font-size-l);
+        background-color: var(--theme-medium-dark);
+        color: inherit;
+        font-family: 'Source Sans Pro';
+        font-weight: var(--font-weight-light);
+        outline: none;
+        border: none;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+.documents{
+    background-color: var(--theme-medium-light);
+    position: relative;
+
+    .docsInnerBox{
+        margin: 2.5%;
+        height: 95%;
+        width: 95%;
+
+        border: 1px dashed var(--theme-dark);
+        background-color: var(--theme-light);
+        color: var(--font-color-dark);
+
+        .docsContainer{
+            align-content: space-around;
+            height: 100%;
+
+            .documentItem{
+                .ccddbdiText{
+                    text-align: center;
                     font-size: var(--font-size-l);
-                    background-color: var(--theme-medium-dark);
-                    font-weight: var(--font-weight-light);
-    
-                    &:hover{ cursor: pointer }
+                    padding: 10px;
+                }
+
+                .ccddbdiBtn{
+                    width: 50%;
+                    height: 45px;
+                    justify-content: center;
+                    align-items: center;
+
+                    border: 1px dashed var(--theme-dark);
+                    color: inherit;
+                    font-size: var(--font-size-m);
+                    text-decoration: none;
                 }
             }
+        }
+    }
+}
+
+@media (max-width: $medium-screen) {
+    .contactContainer{
+        .contactGreeting{ font-size: var(--heading-3-font-size) }
     
-            .documents{
-                margin-top: 5vh;
-                background-color: var(--theme-medium-light);
-                height: auto;
-                width: 90%;
-                margin: 20px auto;
-    
-                .docBox{
-                    position: relative;
-                    
-                    .docs{
-                        margin-bottom: 20px;
-                        .docItem{
-                            width: 100%;
-                            max-width: 100%;
-                            .docText{
-                                padding: 10px;
-                            }
-    
-                            .docButton{
-                                width: 80%;
-                                height: 35px;
-                            }
-                        }
-                    }
-                }
-            }
+        .contactContent{
+            grid-template-columns: 1fr;
+            width: 90%;
+            margin: auto;
         }
     
         .footer{
             width: 95%;
             margin-bottom: 15px;
+        }
+    }
+
+    .contactForm{
+        width: 60%;
+        margin: 0 auto 40px;
+        .formItem{    
+            .cccfiLabel{
+                font-size: var(--font-size-l);
+                margin: 0 0 10px 0;
+            }
+    
+            .cccfiField{
+                width: 100%;
+                font-size: 16px;
+            }
+    
+            .cccfiTextarea{
+                width: 100%;
+                font-size: 16px;
+            }
+        }
+    
+        .formSubmitButton{
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+    .documents{
+        width: 60%;
+        margin: 0 auto 40px;
+
+        .docsInnerBox{
+            margin: 2.5%;
+            height: auto;
+            width: 95%;
+    
+            .docsContainer{
+                .documentItem{
+                    margin: 30px 0;
+
+                    .ccddbdiBtn{ width: 60% }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $small-screen) {
+    .contactContainer{
+        .contactContent{ width: 90% }
+    }
+
+    .contactForm{
+        width: 100%;
+
+        .formItem{
+            .cccfiField{ font-size: 12px }
+    
+            .cccfiTextarea{ font-size: 12px }
+        }
+    }
+
+    .documents{
+        width: 100%;
+        
+        .docsInnerBox{
+            margin: 2.5%;
+            height: auto;
+            width: 95%;
+    
+            .docsContainer{
+                .documentItem{
+                    margin: 30px 0;
+
+                    .ccddbdiText{
+                        text-align: center;
+                        font-size: var(--font-size-l);
+                        padding: 10px;
+                    }
+    
+                    .ccddbdiBtn{
+                        width: 45%;
+                    }
+                }
+            }
         }
     }
 }

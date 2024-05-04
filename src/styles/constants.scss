@@ -1,0 +1,65 @@
+// VARIABLE VALUES DO NOT CHANGE
+$desktop: 1280px;
+$large-tab: 1279px;
+$small-tab: 1023px;
+$large-phone: 779px;
+$small-phone: 449px;
+
+$header-height: 60px;
+
+// Global variables
+:root{  
+    // Constants
+    --theme-dark: #333333;
+    --theme-medium-dark: #777;
+    --theme-medium-light: #AAA;
+    --theme-light: #DDD;
+  
+    // Font weights
+    --font-weight-light: 100;
+    --font-weight-lighter: 300;
+    --font-weight-normal: 400;
+    --font-weight-heavy: 700;
+      
+    // Font sizes
+    --heading-1-font-size: 96px;
+    --heading-2-font-size: 48px;
+    --heading-3-font-size: 32px;
+    --font-size-xl: 28px;
+    --font-size-l: 24px;
+    --font-size-m: 20px;
+    --font-size-s: 16px;
+    --font-size-xs: 12px;
+}
+
+@media (max-width: $large-tab) {}
+
+@media (max-width: $small-tab) {
+    :root{
+        // Font sizes
+        --heading-1-font-size: 72px;
+        --heading-2-font-size: 42px;
+        --heading-3-font-size: 28px;
+        --font-size-xl: 24px;
+        --font-size-l: 20px;
+        --font-size-m: 18px;
+        --font-size-s: 14px;
+        --font-size-xs: 10px;
+    }
+}
+
+@media (max-width: $large-phone) {
+    :root{
+        // Font sizes
+        --heading-1-font-size: 40px;
+        --heading-2-font-size: 30px;
+        --heading-3-font-size: 26px;
+        --font-size-xl: 20px;
+        --font-size-l: 18px;
+        --font-size-m: 14px;
+        --font-size-s: 12px;
+        --font-size-xs: 10px;
+    }
+}
+
+@media (max-width: $small-phone) {}
