@@ -82,7 +82,15 @@
 }
 
 @media (max-width: $small-tab) {
-    .softwareCard{           
+    .softwareCard{
+        .softwareCardFace{            
+            .softwareCardTags{
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
         .softwareCardExpand{
             .softExpBody{
                 display: flex;

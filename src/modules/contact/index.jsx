@@ -1,52 +1,44 @@
 import { useState } from "react";
+import { AppIcons, EMAIL_REGEX } from "../../lib";
 import './contact.scss'
-import {AiFillGithub, AiFillLinkedin, AiFillYoutube, AiFillInstagram} from 'react-icons/ai'
-import { EMAIL_REGEX } from '../../lib'
 
-function Notification({ showNotification, message, error=false}) {
-    const classNames = ['notification'] 
-    
-    if (error) classNames.push('error_background')
-    else classNames.push('success_background')
 
-    return showNotification 
-        ? <div className={classNames.join(' ')}>{message}</div>
-        : <></>
-}
+function Notification({ notification={ error: false, message: null}}) {   
+    const { error, message } = notification;
 
-function DocItem({ text, url, docButtonText }) {
-    return <div className={'documentItem flex-column-center-align'}>
-        <div className={'ccddbdiText'}>{text}</div>
-        <a className={'ccddbdiBtn flex'} target="_blank" rel="noreferrer" href={url}>
-            <span>{docButtonText}</span>
-        </a>
-    </div>
-}
+    const classNames = ['notification', 'flex', 'justifyCenter', 'alignCenter'] 
 
-function Documents(){
-    return <div className={'documents'}>
-        <div className={'docsInnerBox flex-column-center-align'}>
-            <div className={'docsContainer fullWidth flex-column'}>
-                <DocItem 
-                    text={'Download my resume here!'} 
-                    url="https://drive.google.com/file/d/1Qmynu9CUW_dn51qo57UTkNlVMEoTerkp/view?usp=share_link"
-                    docButtonText={'Resume'}
-                />
-                <DocItem 
-                    text={'Download my favorite meme here!'} 
-                    url="https://drive.google.com/file/d/1mKdCEgv2kd6w902U6iIdmFRmRnhWiyFh/view?usp=sharing"
-                    docButtonText={'Meme'}
-                />
-            </div>
-        </div>
-    </div>
+    classNames.push(error ? 'errorBG' : 'successBG')
+
+    classNames.push(!!message ? 'showNote' : 'removeNote')
+
+    return <div className={classNames.join(' ')}>{message}</div>
 }
 
 function ContactForm() {
     const [values, setValues] = useState({})
+    const [error, setError] = useState({})
+    const [notification, setNotification] = useState({})
+    // Flag needed to trigger animations properly
+    const [showNotification, setShowNotification] = useState(false)
 
+    const [waiting, setWaiting] = useState(false)
+
+    const shootNotification = async ({error=false, message=null}) => {
+        if (!message) return
+
+        setShowNotification(true)
+        setNotification({error, message: message})
+
+        setTimeout(() => {
+            setNotification({error, message: null})
+            setTimeout(() => {
+                setShowNotification(false)
+            }, 1000)
+        }, 2000)
+    }
+    
     const sendMessage = async (evt) => {
-        setShowNotification(false)
         evt.preventDefault()
 
         let errObj = {}
@@ -63,121 +55,135 @@ function ContactForm() {
             return
         }
 
+        setError({})
+
         setWaiting(true)
-        let res = await fetch(
+
+        fetch(
             process.env.REACT_APP_FORM_API_URL,
             {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(values)
             }
-        )
-        let data = await res.json()
-        setWaiting(false)
-        let res_message = JSON.parse(data['body'])
-        
-        setNotificationMessage(res_message['message'])
-        setValues({})
+        ).then(res => res.json())
+        .then(data => {
+            data = JSON.parse(data['body'])
 
-        setShowNotification(true)
-        
-        setTimeout(() => {
-            setShowNotification(false)
-            setTimeout(() => {
-                setError(false)
-            }, 300);
-        }, 5000);
+            setWaiting(false)
+
+            setValues({})
+            shootNotification(data['message'])
+        })
+        .catch(err => {
+            console.error(err)
+            setValues({})
+            setWaiting(false)
+        })
     }
 
-    // Validation
-    const [error, setError] = useState({})
-
-    // Notification
-    const [showNotification, setShowNotification] = useState(false)
-    const [notificationMessage, setNotificationMessage] = useState(null)
-
-    // Loading
-    const [waiting, setWaiting] = useState(false)
-
     return <>
-        <Notification message={notificationMessage} error={error} showNotification={showNotification}/>
-        <form className={'contactForm'} onSubmit={sendMessage}>
-        <div className={'formItem flex-column-center-align'}>
-            <label 
-                htmlFor={"contactFormName"} 
-                className={'cccfiLabel'}>
-                Name
-            </label>
+        {showNotification && <Notification notification={notification} />}
+        <form className={'contactForm fullWidth'} onSubmit={sendMessage}>
+        <div className={'formItem flexColumn justifyCenter alignCenter fullWidth'}>
+            <label htmlFor="contactFormName" className='formItemLabel fullWidth'>Name</label>
             <input 
-                id={"contactFormName"} 
-                className={'cccfiField'} 
+                id="contactFormName"
+                className='formItemField'
                 placeholder="What can I call you?" 
                 onChange={({ target: { value }}) => setValues({...values, name: value})} 
                 value={values.name || ''} 
             />
-            {error.name ? <span>{error.name}</span>: <></>}
+            <span className="errorMessage fullWidth">{error.name}</span>
         </div>
-        <div className={'formItem flex-column-center-align'}>
-            <label 
-                htmlFor={'contactFormName'} 
-                className={'cccfiLabel'}
-            >
-                Email
-            </label>
+        <div className={'formItem flexColumn justifyCenter alignCenter fullWidth'}>
+            <label htmlFor='contactFormName' className='formItemLabel fullWidth'>Email</label>
             <input 
                 id="contactFormName" 
-                className={'cccfiField'} 
+                className='formItemField' 
                 placeholder="I'll reply back on this" 
                 onChange={({ target: { value }}) => setValues({...values, email: value})} 
                 value={values.email || ''} 
             />
-            {error.email ? <span>{error.email}</span>: <></>}
+            <span className="errorMessage fullWidth">{error.email}</span>
         </div>
-        <div className={'formItem flex-column-center-align'}>
-            <label 
-                htmlFor={'contactFormName'} 
-                className={'cccfiLabel'}
-            >
-                Message
-            </label>
+        <div className={'formItem flexColumn justifyCenter alignCenter fullWidth'}>
+            <label htmlFor='contactFormName' className='formItemLabel fullWidth'>Message</label>
             <textarea 
                 id="contactFormName" 
-                className={'cccfiTextarea'} 
+                className='formItemTextArea'
                 onChange={({ target: { value }}) => setValues({...values, message: value})} 
                 value={values.message || ''} 
             />
-            {error.message ? <span>{error.message}</span>: <></>}
+            <span className="errorMessage fullWidth">{error.message}</span>
         </div>
-        {!waiting ? <button className={'formSubmitButton'} type='submit'>
-            Send
-        </button> : <></>}
+        <button className='formSubmitButton cursorPointer' type='submit' disabled={waiting}>Send</button> 
     </form>
     </>
 }
 
-export default function Contact(){
+function DocItem({ text, url, docButtonText }) {
+    return <div className={'documentItem flexColumn justifyCenter alignCenter'}>
+        <div className={'documentTitle'}>{text}</div>
+        <a className={'documentButton flex'} target="_blank" rel="noreferrer" href={url}>
+            <span>{docButtonText}</span>
+        </a>
+    </div>
+}
+
+function Documents(){
+    return <div className={'documents fullWidth'}>
+        <div className={'docsInnerBox flexColumn justifyCenter alignCenter'}>
+            <div className={'docsContainer fullWidth flexColumn'}>
+                <DocItem
+                    text='Download my resume here!'
+                    docButtonText='Resume'
+                    url="https://drive.google.com/file/d/1Qmynu9CUW_dn51qo57UTkNlVMEoTerkp/view?usp=share_link"
+                />
+                <DocItem 
+                    text='Download my favorite meme here!'
+                    docButtonText='Meme'
+                    url="https://drive.google.com/file/d/1mKdCEgv2kd6w902U6iIdmFRmRnhWiyFh/view?usp=sharing"
+                />
+            </div>
+        </div>
+    </div>
+}
+
+const Footer = ({ socials }) => {
+    return <div className={'contactFooter flex alignCenter'}>
+        <div className={'footerLabel'}>&#169; 2024 Sanket Jain</div>
+        <div className={'footerSocials'}>
+            {socials
+            .filter(a => !!a.url)
+            .map(({app, url}, a) => <a
+                key={a} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="removeTextFormat footerSocial"
+                href={url}
+            >
+                {AppIcons[app.trim()]}
+            </a>)}
+        </div>
+    </div>
+}
+
+export default function Contact({ members = [] }){
+    const me = (members || []).filter(member => member.name === 'Sanket Jain')[0]
+
     return <div className={'contactContainer section'} id='contact'>
         <div className="sectionTitle">Contact</div>
         
-        <div className={'contactGreeting'}>
-            Thank you for visiting my website! Leave me a message if you have any questions!
-        </div>
-        <div className={'contactContent sectionContainer'}>
-            <ContactForm />
-            <Documents />
-        </div>
-        <div className={'contactFooter flex alignCenter'}>
-            <div className={'cfTrademark'}>
-                &#169; 2024 Sanket Jain 
+        <div className="sectionContainer">
+            <div className={'contactGreeting'}>
+                Thank you for visiting my website! Leave me a message if you have any questions!
             </div>
-            <div className={'cfSocials'}>
-                <span><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/sanket-jain-415a606a/"><AiFillLinkedin /></a></span>
-                <span><a target="_blank" rel="noreferrer" href="https://github.com/MrJay37"><AiFillGithub/></a></span>
-                <span><a target="_blank" rel="noreferrer" href="https://www.youtube.com/channel/UC4QOttreVJ4zN6W1uBjtHIQ"><AiFillYoutube /></a></span>
-                <span><a target="_blank" rel="noreferrer" href="https://www.instagram.com/abagauss/"><AiFillInstagram /></a></span>
+            <div className={'contactContent fullWidth'}>
+                <ContactForm />
+                <Documents />
             </div>
+            <Footer socials={me.socialMedia} />  
         </div>
     </div>
 }

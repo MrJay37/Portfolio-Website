@@ -1,10 +1,6 @@
 @import './constants.scss';
 
 
-.success_background { background-color: green }
-
-.error_background { background-color: red}
-
 .removeTextFormat {
     color: inherit;
     text-decoration: none;
@@ -26,7 +22,9 @@
 
 .alignCenter { align-items: center }
 
-.section { width: 100% }
+.section { 
+    width: 100%
+}
 
 .lightThemeSection {
     background-color: var(--theme-light);
@@ -34,7 +32,7 @@
 }
 
 .sectionTitle {
-    padding-top: calc($header-height + 10px);
+    padding-top: calc($header-height + 20px);
     width: 80%;
     margin: auto;
     text-align: center;
@@ -58,10 +56,4 @@
 .cardBorderLight {
     border: 1px solid var(--theme-light);
     overflow: hidden;
-}
-
-.switch {
-    text-align: center;
-    width: 100%;
-    cursor: pointer;
 }

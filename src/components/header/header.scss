@@ -17,9 +17,7 @@ $header-height: 60px;
         font-weight: var(--font-weight-light);
         font-size: var(--font-size-m);
 
-        .headerAvatar{
-            font-size: var(--font-size-l);
-        }
+        .headerAvatar{ font-size: var(--font-size-l) }
 
         .headerNavMenu { .navMenOpt { margin: 0px 18px } }
 
@@ -68,7 +66,7 @@ $header-height: 60px;
     .headerContainer {   
         .headerContent {
             .headerNavDrawer {
-                .navDrawerMenu{                                      
+                .navDrawerMenu{
                     .navDrawerMenOpt {
                         font-size: var(--font-size-l);
                         padding: 10px;

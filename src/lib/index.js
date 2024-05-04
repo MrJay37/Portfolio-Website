@@ -1,3 +1,5 @@
+import {AiFillGithub, AiFillLinkedin, AiFillYoutube, AiFillInstagram} from 'react-icons/ai'
+
 const months = {
     1: 'Jan',
     2: 'Feb',
@@ -34,3 +36,10 @@ export const formatToYearMonth = (date_obj, includeDay=false) => {
 }
 
 export const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+export const AppIcons = {
+    'YouTube': <AiFillYoutube />,
+    'Instagram': <AiFillInstagram />,
+    'GitHub': <AiFillGithub />,
+    'LinkedIn': <AiFillLinkedin />
+}

@@ -1,4 +1,4 @@
-@import '../../styles/utils.scss';
+@import '../../styles/constants.scss';
 
 .aboutContainer {
     .greeting {
@@ -49,8 +49,9 @@
 
         .introPicture{
             img {
-                width: 100%;
+                width: auto;
                 object-fit: cover;
+                max-height: 500px;
             }
         }
     }

@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Header } from './components';
 import { 
     About,
-    // Contact, 
+    Contact, 
     Education, 
     Music,
     Software,
@@ -43,7 +43,7 @@ const App = () => {
         <Work />
         <Software members={members} />
         <Music members={members}/>
-        {/* <Contact /> */}
+        <Contact members={members} />
     </>
 }
 

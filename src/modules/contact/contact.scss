@@ -1,63 +1,33 @@
 @import '../../styles/utils.scss';
 
 .contactContainer{
-    margin: 0;
-    
+    min-height: calc(100vh - $header-height);
+
     .contactGreeting{
-        max-width: var(--max-container-width);
         margin: auto;
         text-align: center;
-        font-weight: var(--font-weight-light);
+        font-weight: var(--font-weight-lighter);
         font-size: var(--font-size-l);
     }
 
     .contactContent{
-        width: 100%;
-        max-width: 1128px;
         display: grid;
         grid-template-columns: 4fr 3fr;
-    }
-
-    .contactFooter{
-        max-width: var(--max-container-width);
-        // height: var(--header-height);
-        margin: auto;
-        justify-content: space-between;
-        
-        .cfTrademark{
-            padding: 10px 0;
-        }
-
-        .cfSocials{
-            span{
-                padding: 0 10px;
-                font-size: var(--font-size-xl);
-
-                a{
-                    color: inherit;
-                    text-decoration: none;
-                }
-            }
-        }
     }
 }
 
 .contactForm{
-    width: 100%;
-
     .formItem{
-        width: 100%;
         margin: 20px 0;
 
-        .cccfiLabel{
-            width: 100%;
+        .formItemLabel{
             font-size: var(--font-size-xl);
             font-weight: var(--font-weight-light);
             font-family: 'Source Sans Pro';
             margin: 0 0 20px 0;
         }
 
-        .cccfiField{
+        .formItemField{
             width: 100%;
             align-self: flex-start;
             width: 80%;
@@ -70,23 +40,29 @@
             }
         }
 
-        .cccfiTextarea{
+        .formItemTextArea{
             width: 80%;
             align-self: flex-start;
             height: 160px;
             font-size: var(--font-size-s);
-            padding: 15px 15px;
+            padding: 15px;
             font-family: 'Source Sans Pro', Courier, monospace;
 
             &:focus{
                 outline: none;
             }
         }
+
+        .errorMessage{
+            margin: 5px 0;
+            color: #ff4a59;
+            font-size: var(--font-size-s);
+            min-height: calc(var(--font-size-s) + 4px);
+        }
     }
 
     .formSubmitButton{
         width: 25%;
-        // margin: 0 auto;
         height: 40px;
         font-size: var(--font-size-l);
         background-color: var(--theme-medium-dark);
@@ -94,17 +70,14 @@
         font-family: 'Source Sans Pro';
         font-weight: var(--font-weight-light);
         outline: none;
-        border: none;
-
-        &:hover{
-            cursor: pointer;
-        }
+        border: none;        
     }
 }
 
 .documents{
     background-color: var(--theme-medium-light);
     position: relative;
+    margin-top: 30px;
 
     .docsInnerBox{
         margin: 2.5%;
@@ -116,17 +89,19 @@
         color: var(--font-color-dark);
 
         .docsContainer{
-            align-content: space-around;
+            justify-content: space-around;
             height: 100%;
 
             .documentItem{
-                .ccddbdiText{
+                color: var(--theme-dark);
+
+                .documentTitle{
                     text-align: center;
                     font-size: var(--font-size-l);
                     padding: 10px;
                 }
 
-                .ccddbdiBtn{
+                .documentButton{
                     width: 50%;
                     height: 45px;
                     justify-content: center;
@@ -142,106 +117,130 @@
     }
 }
 
-@media (max-width: $medium-screen) {
-    .contactContainer{
-        .contactGreeting{ font-size: var(--heading-3-font-size) }
+.contactFooter{
+    margin-top: 20px;
+    justify-content: space-between;
     
-        .contactContent{
-            grid-template-columns: 1fr;
-            width: 90%;
-            margin: auto;
+    .footerLabel{
+        padding: 10px 0;
+    }
+
+    .footerSocials{
+        .footerSocial{
+            padding: 0 10px;
+            font-size: var(--font-size-xl);
+        }
+    }
+}
+
+.notification{
+    position: fixed;
+    bottom: 15vh;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    font-size: var(--font-size-l);
+    text-align: center;
+    border: 1px solid var(--theme-dark);
+    height: 100px;
+    font-weight: var(--font-weight-lighter);
+}
+
+.showNote{
+    animation: 200ms ease-in-out 0s 1 onLoad;
+}
+
+.removeNote{
+    animation: 200ms ease-in-out 0s 1 onUnload;
+    animation-fill-mode: forwards;
+}
+
+.successBG { 
+    background-color: rgba(0, 128, 0, 90%);
+}
+
+.errorBG { 
+    background-color: rgba(255, 0, 0, 90%);
+}
+
+@keyframes onLoad {
+    from { filter: opacity(0)}
+    to { filter: opacity(100%)}
+}
+
+@keyframes onUnload {
+    from { filter: opacity(100%)}
+    to { filter: opacity(0)}
+}
+  
+
+@media (max-width: $small-tab) {
+    .contactContainer{
+        .contactGreeting{
+            font-size: var(--font-size-l);
         }
     
-        .footer{
-            width: 95%;
-            margin-bottom: 15px;
+        .contactContent{
+            display: flex;
+            flex-direction: column;
         }
     }
 
     .contactForm{
-        width: 60%;
-        margin: 0 auto 40px;
-        .formItem{    
-            .cccfiLabel{
-                font-size: var(--font-size-l);
-                margin: 0 0 10px 0;
-            }
-    
-            .cccfiField{
+        max-width: 450px;
+        margin: 20px auto;
+
+        .formItem{
+            margin: 10px 0;
+       
+            .formItemField{ 
                 width: 100%;
-                font-size: 16px;
+                font-size: var(--font-size-m);
             }
-    
-            .cccfiTextarea{
+            
+            .formItemTextArea{
                 width: 100%;
-                font-size: 16px;
+                font-size: var(--font-size-m);
             }
         }
     
-        .formSubmitButton{
-            width: 100%;
-            margin-bottom: 10px;
-        }
+        .formSubmitButton{ width: 100% }
     }
 
-    .documents{
-        width: 60%;
-        margin: 0 auto 40px;
+    .documents{   
+        max-width: 450px;
+        margin: 20px auto;
 
         .docsInnerBox{
             margin: 2.5%;
-            height: auto;
-            width: 95%;
     
             .docsContainer{
                 .documentItem{
-                    margin: 30px 0;
-
-                    .ccddbdiBtn{ width: 60% }
+                    padding: 20px 0;
                 }
             }
         }
     }
 }
 
-@media (max-width: $small-screen) {
-    .contactContainer{
-        .contactContent{ width: 90% }
-    }
+@media (max-width: $large-phone) {
+    .contactFooter{
+        flex-direction: column-reverse;
 
-    .contactForm{
-        width: 100%;
-
-        .formItem{
-            .cccfiField{ font-size: 12px }
+        .footerLabel{
+            text-align: center;
+            width: 100%;
+        }
     
-            .cccfiTextarea{ font-size: 12px }
+        .footerSocials{
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
         }
     }
 
-    .documents{
-        width: 100%;
-        
-        .docsInnerBox{
-            margin: 2.5%;
-            height: auto;
-            width: 95%;
-    
-            .docsContainer{
-                .documentItem{
-                    margin: 30px 0;
-
-                    .ccddbdiText{
-                        text-align: center;
-                        font-size: var(--font-size-l);
-                        padding: 10px;
-                    }
-    
-                    .ccddbdiBtn{
-                        width: 45%;
-                    }
-                }
-            }
-        }
+    .notification{
+        height: 40px;
     }
 }
