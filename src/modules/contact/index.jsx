@@ -37,7 +37,7 @@ function ContactForm() {
             }, 1000)
         }, 2000)
     }
-    
+
     const sendMessage = async (evt) => {
         evt.preventDefault()
 
@@ -62,18 +62,23 @@ function ContactForm() {
         fetch(
             process.env.REACT_APP_FORM_API_URL,
             {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(values)
+                method: 'POST',                
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    appId: process.env.REACT_APP_PC_APP_ID,
+                    ...values
+                })
             }
-        ).then(res => res.json())
+        ).then(res => {
+            return res.text()
+        })
         .then(data => {
-            data = JSON.parse(data['body'])
-
             setWaiting(false)
 
             setValues({})
-            shootNotification(data['message'])
+            shootNotification({message: data + '. I will get back to you soon!'})
         })
         .catch(err => {
             console.error(err)
