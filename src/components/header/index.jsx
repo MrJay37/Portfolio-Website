@@ -58,7 +58,7 @@ export default function Header() {
 
 	return <div className={'headerContainer flex alignCenter fullWidth'}>
 		<div className={'headerContent flex alignCenter fullWidth'}>
-			<a className={"headerAvatar flex removeTextFormat"} href='#'>Sanket Jain</a>
+			<a className={"headerAvatar flex removeTextFormat"} href='/'>Sanket Jain</a>
 			<NavigationGroup />
 			<span className={'headerDrawerBtn'}>
 				<HambugerButton clicked={drawer} onClick={closeDrawer} />
