@@ -1,8 +1,7 @@
 import './about.scss'
 import { Chart as ChartJS, LinearScale, CategoryScale, BarElement } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { sanityClient, urlFor} from '../../lib/sanityClient'
-import { useEffect, useState } from 'react';
+import { urlFor} from '../../lib/sanityClient'
 
 ChartJS.register(LinearScale, CategoryScale, BarElement);
 
@@ -12,49 +11,9 @@ const SubTitle = ({ children }) => {
     return <h3 className='introSubTitle'>{children}</h3>
 }
 
-export default function About({ setMeme, setResume }) {
-    const [aboutData, setAboutData] = useState(null);
-    const [bannerPicUrl, setBannerPicUrl] = useState(null)
-    const [myPicUrl, setMyPicUrl] = useState(null)
-
-    useEffect(() => {
-        if (process.env.REACT_APP_ENV === 'DEV'){
-            fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                .then(data => data.text())
-                .then(res => JSON.parse(res))
-                .then(res => {
-                    setAboutData(res.intro[0]);
-                    setBannerPicUrl(urlFor(res.intro[0].bannerPic).url());
-                    setMyPicUrl(urlFor(res.intro[0].myPic).url());
-                    setMeme(urlFor(res.intro[0].favMeme).url());
-                    setResume(res.intro[0].resumeURL);
-                })
-        }  
-        else{
-            sanityClient
-                .fetch(`*[_type == "about"]{
-                    title,
-                    favMeme,
-                    skills,
-                    bannerPic,
-                    intro,
-                    resume,
-                    myPic,
-                    "resumeURL": resume.asset->url
-                }`)
-                .then((data) => {
-                    setAboutData(data[0]);
-                    setBannerPicUrl(urlFor(data[0].bannerPic).url());
-                    setMyPicUrl(urlFor(data[0].myPic).url());
-                    setMeme(urlFor(data[0].favMeme).url());
-                    setResume(data[0].resumeURL);
-                })
-                .catch(console.error); 
-        }    
-    }, []);
-
+export default function About({ aboutData }) {
     return <div className={'aboutContainer lightThemeSection section'}>
-        <img className={'banner'} src={bannerPicUrl} alt='banner' />
+        <img className={'banner'} src={urlFor(aboutData.bannerPic).url()} alt='banner' />
         <div className={'greeting flex alignCenter'}>
             <h1 className='introSubTitle'>Hi! I make music and software</h1>
         </div>
@@ -69,7 +28,7 @@ export default function About({ setMeme, setResume }) {
                     ))}
                 </div>
                 <div className={'introPicture fullWidth flex alignCenter'}>
-                    <img src={myPicUrl} alt='me'/>
+                    <img src={urlFor(aboutData.myPic).url()} alt='me'/>
                 </div>
             </div>
             <div className={'introCharContainer flex-column-center-align'}>

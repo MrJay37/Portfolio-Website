@@ -74,30 +74,33 @@ export default function Software({ members }) {
             setSWData(projects.sort((a, b) => a.startDate < b.startDate ? 1: -1))
         }
 
-        if (process.env.REACT_APP_ENV === 'DEV'){
-            fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                .then(data => data.text())
-                .then(res => JSON.parse(res))
-                .then(res =>  transformData(res.software))
+        if (swData === null && members !=null){
+            if (process.env.REACT_APP_ENV === 'DEV'){
+                fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
+                    .then(data => data.text())
+                    .then(res => JSON.parse(res))
+                    .then(res =>  transformData(res.software))
+            }
+            else{
+                sanityClient
+                    .fetch(
+                        `*[_type == "software"]{
+                            description,
+                            links,
+                            members,
+                            picture,
+                            startDate,
+                            endDate,
+                            title,
+                            tech_stack
+                        }`
+                    )
+                    .then((data) =>  transformData(data))
+                    .catch(console.error);
+            }  
         }
-        else{
-            if (swData === null && members !== null ) sanityClient
-                .fetch(
-                    `*[_type == "software"]{
-                        description,
-                        links,
-                        members,
-                        picture,
-                        startDate,
-                        endDate,
-                        title,
-                        tech_stack
-                    }`
-                )
-                .then((data) =>  transformData(data))
-                .catch(console.error);
-        }    
-    }, [members]);
+          
+    }, [members, swData]);
 
     return <div className={'softwareContainer section'} id='software'>
         <div className='sectionTitle'>Software</div>
