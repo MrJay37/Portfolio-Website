@@ -127,28 +127,52 @@ function ContactForm() {
     </>
 }
 
-function DocItem({ text, url, docButtonText }) {
+function DocItem({ text, url, docButtonText, fileName }) {
+    // Function provided here to not use download feature of <a> tag
+    // It does not work as expected sometimes
+    const handleDownload = () => {
+        fetch(url)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = fileName || "downloaded-file";
+            document.body.appendChild(link);
+    
+            link.click();
+    
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+          })
+          .catch((error) => {
+            console.error("Error fetching the file:", error);
+          });
+      };
+
     return <div className={'documentItem flexColumn justifyCenter alignCenter'}>
         <div className={'documentTitle'}>{text}</div>
-        <a className={'documentButton flex'} target="_blank" rel="noreferrer" href={url}>
-            <span>{docButtonText}</span>
-        </a>
+        <div className={'documentButton flex cursorPointer'} onClick={() => handleDownload()}>
+            {docButtonText}
+        </div>
     </div>
 }
 
-function Documents(){
+function Documents({meme, resume}){
     return <div className={'documents fullWidth'}>
         <div className={'docsInnerBox flexColumn justifyCenter alignCenter'}>
             <div className={'docsContainer fullWidth flexColumn'}>
                 <DocItem
                     text='Download my resume here!'
                     docButtonText='Resume'
-                    url="https://drive.google.com/file/d/1Qmynu9CUW_dn51qo57UTkNlVMEoTerkp/view?usp=share_link"
+                    url={resume}
+                    fileName={'Sanket_Jain_Resume.pdf'}
                 />
                 <DocItem 
                     text='Download my favorite meme here!'
                     docButtonText='Meme'
-                    url="https://drive.google.com/file/d/1mKdCEgv2kd6w902U6iIdmFRmRnhWiyFh/view?usp=sharing"
+                    url={meme}
+                    fileName={'favMeme.jpg'}
                 />
             </div>
         </div>
@@ -174,7 +198,7 @@ const Footer = ({ socials }) => {
     </div>
 }
 
-export default function Contact({ members = [] }){
+export default function Contact({ members = [], meme, resume }){
     const me = (members || []).filter(member => member.name === 'Sanket Jain')[0]
 
     return <div className={'contactContainer section'} id='contact'>
@@ -186,7 +210,7 @@ export default function Contact({ members = [] }){
             </div>
             <div className={'contactContent fullWidth'}>
                 <ContactForm />
-                <Documents />
+                <Documents meme={meme} resume={resume} />
             </div>
             <Footer socials={me.socialMedia} />  
         </div>

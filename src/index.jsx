@@ -19,6 +19,9 @@ import "./styles/global.scss"
 const App = () => {
     const [members, setMembers] = useState(null)
 
+    const [meme, setMeme] = useState(null)
+    const [resume, setResume] = useState(null)
+
     useEffect(() => {
         if (process.env.REACT_APP_ENV === 'DEV'){
             fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
@@ -38,12 +41,12 @@ const App = () => {
 
     return <>
         <Header />
-        <About />
+        <About setMeme={setMeme} setResume={setResume} />
         <Education />
         <Work />
         <Software members={members} />
         <Music members={members}/>
-        <Contact members={members} />
+        <Contact members={members} resume={resume} meme={meme}/>
     </>
 }
 

@@ -65,11 +65,13 @@ export default function Software({ members }) {
 
     useEffect(() => {
         const transformData = data => {
-            setSWData(data.map(project => ({
+            const projects = data.map(project => ({
                 ...project,
                 picture: urlFor(project.picture).url(),
                 members: project.members.map(mem => members.filter(m => m._id === mem._ref)[0])
-            })))
+            }))
+
+            setSWData(projects.sort((a, b) => a.startDate < b.startDate ? 1: -1))
         }
 
         if (process.env.REACT_APP_ENV === 'DEV'){
@@ -95,7 +97,7 @@ export default function Software({ members }) {
                 .then((data) =>  transformData(data))
                 .catch(console.error);
         }    
-    }, [members, swData]);
+    }, [members]);
 
     return <div className={'softwareContainer section'} id='software'>
         <div className='sectionTitle'>Software</div>

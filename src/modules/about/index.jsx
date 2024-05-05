@@ -8,11 +8,11 @@ ChartJS.register(LinearScale, CategoryScale, BarElement);
 
 ChartJS.defaults.font.size = 16
 
-const SubTitle = ({ children}) => {
+const SubTitle = ({ children }) => {
     return <h3 className='introSubTitle'>{children}</h3>
 }
 
-export default function About() {
+export default function About({ setMeme, setResume }) {
     const [aboutData, setAboutData] = useState(null);
     const [bannerPicUrl, setBannerPicUrl] = useState(null)
     const [myPicUrl, setMyPicUrl] = useState(null)
@@ -26,15 +26,28 @@ export default function About() {
                     setAboutData(res.intro[0]);
                     setBannerPicUrl(urlFor(res.intro[0].bannerPic).url());
                     setMyPicUrl(urlFor(res.intro[0].myPic).url());
+                    setMeme(urlFor(res.intro[0].favMeme).url());
+                    setResume(res.intro[0].resumeURL);
                 })
         }  
         else{
             sanityClient
-                .fetch(`*[_type == "about"]`)
+                .fetch(`*[_type == "about"]{
+                    title,
+                    favMeme,
+                    skills,
+                    bannerPic,
+                    intro,
+                    resume,
+                    myPic,
+                    "resumeURL": resume.asset->url
+                }`)
                 .then((data) => {
                     setAboutData(data[0]);
                     setBannerPicUrl(urlFor(data[0].bannerPic).url());
                     setMyPicUrl(urlFor(data[0].myPic).url());
+                    setMeme(urlFor(data[0].favMeme).url());
+                    setResume(data[0].resumeURL);
                 })
                 .catch(console.error); 
         }    

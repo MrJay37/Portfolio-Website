@@ -49,16 +49,24 @@ export default function Work() {
     const [data, setData] = useState([])
 
     useEffect(() => {
+        const getEarliestStartDate = org => {
+            return new Date(org.positions.sort((a, b) => new Date(a.start) < new Date(b.start) ? 1 : -1)[0].start)
+        }
+        const transformData = data => {
+            const works = data.map(work => ({...work, logo: urlFor(work.logo).url()}))
+            
+            setData(works.sort((a, b) => getEarliestStartDate(a) < getEarliestStartDate(b) ? 1 : -1))
+        }
         if (process.env.REACT_APP_ENV === 'DEV'){
             fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
                 .then(data => data.text())
                 .then(res => JSON.parse(res))
-                .then(res => setData(res.work.map(work => ({...work, logo: urlFor(work.logo)}))))
+                .then(res => transformData(res.work))
         }  
         else{
             sanityClient
                 .fetch(`*[_type == "work"]`)
-                .then((data) => setData(data.map(work => ({...work,  logo: urlFor(work.logo).url()}))))
+                .then((data) => transformData(data))
                 .catch(console.error); 
         }    
     }, []);

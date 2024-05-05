@@ -74,12 +74,13 @@ export default function Music({ members }) {
     const [musicData, setMusicData] = useState(null);
 
     useEffect(() => {
-        const transformData = data => setMusicData(data.map(project => ({
-            ...project,
-            img: urlFor(project.img).url(),
-            members: project.members.map(mem => members.filter(m => mem._ref === m._id)[0])
-        })
-        ))
+        const transformData = data => setMusicData(
+            data.map(project => ({
+                ...project,
+                img: urlFor(project.img).url(),
+                members: project.members.map(mem => members.filter(m => mem._ref === m._id)[0])
+            })).sort((a, b) => new Date(a.createdOn) > new Date(b.createdOn) ? 1 : -1)
+        )
 
         if (process.env.REACT_APP_ENV === 'DEV'){
             fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
