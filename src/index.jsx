@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { urlFor } from './lib/sanityClient';
+import { fetchAppData, urlFor } from './lib/sanityClient';
 
 import { Header } from './components';
 import { 
@@ -13,8 +13,6 @@ import {
     Work
 } from './modules';
 
-import { sanityClient } from './lib/sanityClient';
-
 import "./styles/global.scss"
 
 const App = () => {
@@ -22,35 +20,12 @@ const App = () => {
     const [aboutData, setAboutData] = useState(null)
 
     useEffect(() => {
-        if (process.env.REACT_APP_ENV === 'DEV'){
-            fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                .then(data => data.text())
-                .then(res => JSON.parse(res))
-                .then(res => {
-                    setMembers(res.members)
-                    setAboutData(res.intro[0])
-                })
-        }
-        else{
-            sanityClient
-                .fetch(`*[_type == "members"]`)
-                .then((data) => setMembers(data))
-                .catch(console.error)
-                .then(() => {
-                    sanityClient
-                    .fetch(`*[_type == "about"]{
-                        title,
-                        favMeme,
-                        skills,
-                        bannerPic,
-                        intro,
-                        resume,
-                        myPic,
-                        "resumeURL": resume.asset->url
-                    }`)
-                    .then((data) => setAboutData(data[0]))
-                }).catch(console.error);
-        }   
+        fetchAppData()
+            .then(({ members: membersData, about: aboutData }) => {
+                setMembers(membersData)
+                setAboutData(aboutData)
+            })
+            .catch(console.error)
     }, [])
 
     if (!members || !aboutData) return <></>

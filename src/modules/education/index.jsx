@@ -1,6 +1,6 @@
 import './education.scss'
 import { formatToYearMonth } from '../../lib'
-import { sanityClient } from '../../lib/sanityClient'
+import { fetchEducation } from '../../lib/sanityClient'
 import { useEffect, useState } from 'react'
 
 const EducationCard = ({url, endDate, startDate, school, degree, program, location }) => {
@@ -33,36 +33,12 @@ export default function Education() {
     const [educationData, setEducationData] = useState(null)
 
     useEffect(() => {
-        if (process.env.REACT_APP_ENV === 'DEV'){
-            fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                .then(data => data.text())
-                .then(res => JSON.parse(res))
-                .then(res => {
-                    let edu = res.education
-                    edu.sort((a, b) => a.startDate < b.startDate ? 1 : -1);
-                    setEducationData(edu)
-                })
-        }  
-        else{
-            sanityClient
-                .fetch(
-                    `*[_type == "education"]{
-                        school, 
-                        startDate,
-                        endDate,
-                        url, 
-                        degree,
-                        program, 
-                        location
-                    }`
-                )
-                .then((data) => {
-                    let edu = data           
-                    edu.sort((a, b) => a.startDate < b.startDate ? 1 : -1);
-                    setEducationData(edu)
-                })
-                .catch(console.error)
-        }   
+        fetchEducation()
+            .then(data => {
+                data.sort((a, b) => a.startDate < b.startDate ? 1 : -1)
+                setEducationData(data)
+            })
+            .catch(console.error)
     }, []);
 
     return <div className={'eduContainer section'} id="education">

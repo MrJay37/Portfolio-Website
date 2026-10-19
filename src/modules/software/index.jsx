@@ -1,6 +1,6 @@
 import './software.scss'
 import { useState, useEffect } from 'react'
-import { sanityClient, urlFor } from '../../lib/sanityClient'
+import { fetchSoftware, urlFor } from '../../lib/sanityClient'
 import { formatToYearMonth as dtFmt } from '../../lib'
 import { CardExpand } from '../../components'
 
@@ -75,29 +75,9 @@ export default function Software({ members }) {
         }
 
         if (swData === null && members !=null){
-            if (process.env.REACT_APP_ENV === 'DEV'){
-                fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                    .then(data => data.text())
-                    .then(res => JSON.parse(res))
-                    .then(res =>  transformData(res.software))
-            }
-            else{
-                sanityClient
-                    .fetch(
-                        `*[_type == "software"]{
-                            description,
-                            links,
-                            members,
-                            picture,
-                            startDate,
-                            endDate,
-                            title,
-                            tech_stack
-                        }`
-                    )
-                    .then((data) =>  transformData(data))
-                    .catch(console.error);
-            }  
+            fetchSoftware()
+                .then(transformData)
+                .catch(console.error)
         }
           
     }, [members, swData]);

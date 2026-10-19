@@ -2,7 +2,7 @@ import './work.scss'
 import { useState, useEffect } from 'react'
 import { formatToYearMonth as dtFmt } from '../../lib'
 import { CardExpand } from '../../components'
-import { sanityClient, urlFor } from '../../lib/sanityClient'
+import { fetchWork, urlFor } from '../../lib/sanityClient'
 
 function PositionCard({posName, start, end, duties, location: {state, country}}){
     return <div className={'workPositionCard cardBorder'}>
@@ -57,18 +57,9 @@ export default function Work() {
             
             setData(works.sort((a, b) => getEarliestStartDate(a) < getEarliestStartDate(b) ? 1 : -1))
         }
-        if (process.env.REACT_APP_ENV === 'DEV'){
-            fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                .then(data => data.text())
-                .then(res => JSON.parse(res))
-                .then(res => transformData(res.work))
-        }  
-        else{
-            sanityClient
-                .fetch(`*[_type == "work"]`)
-                .then((data) => transformData(data))
-                .catch(console.error); 
-        }    
+        fetchWork()
+            .then(transformData)
+            .catch(console.error)
     }, []);
     
     return <div className={'workContainer lightThemeSection section'} id='work'>

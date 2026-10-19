@@ -2,7 +2,7 @@ import './music.scss'
 import { CardExpand } from '../../components'
 import { useState, useEffect } from 'react'
 import { AiFillYoutube, AiFillInstagram} from 'react-icons/ai'
-import { sanityClient, urlFor } from '../../lib/sanityClient'
+import { fetchMusic, urlFor } from '../../lib/sanityClient'
 
 
 const appIcons = {
@@ -82,18 +82,9 @@ export default function Music({ members }) {
             })).sort((a, b) => new Date(a.createdOn) > new Date(b.createdOn) ? 1 : -1)
         )
 
-        if (process.env.REACT_APP_ENV === 'DEV'){
-            fetch(process.env.REACT_APP_LOCAL_DATA_FILE_NAME)
-                .then(data => data.text())
-                .then(res => JSON.parse(res))
-                .then(res => transformData(res.music))
-        }  
-        else{
-            sanityClient
-                .fetch(`*[_type == "music"]`)
-                .then((data) => transformData(data))
-                .catch(console.error); 
-        }
+        fetchMusic()
+            .then(transformData)
+            .catch(console.error)
     }, [members]);
 
     return <div className={'musicContainer section lightThemeSection'} id='music'>
